@@ -4,11 +4,12 @@
      }
      #sidebar{
   position: fixed;
-  width: 200px;
-  height: 100%;
-  background: #41ade7;
-  left: -200px;
-  transition: all 500ms linear;
+  width: 270px;
+  height: 300%;
+  background: #ffffff;
+  left: -270px;
+  transition: all 300ms linear;
+  top: 58px;
      }
      
      #sidebar.active {
@@ -34,9 +35,10 @@
           
     #sidebar .toggle-btn{
   position: absolute;
-  left: 230px;
+  left: 300px;
   top: 20px;
   cursor: pointer;
+  background-color: #ffffff;
              }
              
     #sidebar .toggle-btn span{
