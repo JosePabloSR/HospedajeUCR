@@ -9,24 +9,78 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="CSS.css" rel="stylesheet" type="text/css"/>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            .headier {
+                background-color: #41ade7;
+                background-size: 7px;
+                font-size: 25px; /* Tamaño de fuente */
+                font-weight: bold; /* Grosor de fuente */
+                border-bottom: 2px solid black;
+                border-bottom-color: #323232;
+
+            }
+            .footer{
+                background-color: #323232;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                color: #ffffff;
+            }
+            .UCR-img{
+                width: 125px;
+                height: auto;
+            }
+        </style>
     </head>
     <body background="Ssur.jpg">
-        
-        
+
+        <h1 class="headier">
+            <img src="UCR_LOGO.png" alt="Texto alternativo de la imagen" class="UCR-img"> Universidad de Costa Rica. Servicio de hospedajes para profesores.
+        </h1>
+
+
         <div id="sidebar"> 
-        <div class="toggle-btn">    
-        
-        <span> &#9776;</span>
-         </div>
-        <ul>
-           <li>  <img src="UCR_LOGO_NEGRO.png" alt=""/> </li>
-           <li> <a href="reservar.html">Reservar</a> </li> 
-           <li> <a href="">Reservaciones</a> </li> 
-           <li> <a href="">Reservaciones Activas</a> </li> 
-           <li> <a href="">Usuarios Activos</a> </li>
-        </ul>
+            <div class="toggle-btn">    
+
+                <span> &#9776;</span>
+            </div>
+            <ul>
+                <li>  <img src="UCR_LOGO_NEGRO.png" alt=""/> </li>
+                <li>
+                    <form method="post" action="reservar.html">
+
+                        <button type="submit" class="btn btn-dark">Reservar</button>
+
+                    </form>
+                </li> 
+                <li>
+                    <form method="post" action="reservar.html">
+
+                        <button type="submit" class="btn btn-dark">Reservaciones</button>
+
+                    </form>
+                </li> 
+                <li>
+                    <form method="post" action="reservar.html">
+
+                        <button type="submit" class="btn btn-dark">Reservaciones activas</button>
+
+                    </form>
+                </li> 
+                <li>
+                    <form method="post" action="reservar.html">
+
+                        <button type="submit" class="btn btn-dark">Usuarios activos</button>
+
+                    </form>
+                </li>
+            </ul>
         </div>
-                
-        <script src="JSC.js" charset="UTF-8">  </script>
+
+        <script src="JSC.js" charset="UTF-8"></script>
+        <footer class="footer">
+            <p>© 2023 Universidad de Costa Rica - Tel. 2511-4000. Aviso Legal. Última actualización: julio, 2023</p>
+        </footer>
     </body>
 </html>
