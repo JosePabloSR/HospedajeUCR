@@ -47,3 +47,11 @@
   border: 1px solid #000;  
              }
              
+             body{
+                
+                 background-image: url("Ssur.jpg");
+                 background-repeat: no-repeat;
+                 background-size: cover;
+                 background-attachment: fixed;
+                 
+             }
