@@ -5,10 +5,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
     <head>
-        <title>Reservaciones</title>
+        <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <script>
         // Datos de disponibilidad de las camas
         var disponibilidadCamas = {
@@ -125,50 +124,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     </script>
     </head>
 
-    <body onload="cargarHoras();">
-        <div class="container mt-4">
-        <div id="solicitudDatos">
-            <h2>Ingrese los datos de la reserva</h2>
-            <form>
-                <div class="form-group">
-                    <label for="fechaEntrada">Fecha de entrada:</label>
-                    <input type="date" class="form-control" id="fechaEntrada">
-                    <label for="horaEntrada">Hora de entrada:</label>
-                    <select class="form-control" id="horaEntrada"></select>
-                </div>
-                <div class="form-group">
-                    <label for="fechaSalida">Fecha de salida:</label>
-                    <input type="date" class="form-control" id="fechaSalida">
-                    <label for="horaSalida">Hora de salida:</label>
-                    <select class="form-control" id="horaSalida"></select>
-                </div>
-                <div class="form-group">
-                    <label for="nombreReservacion">Nombre de la persona que realizará la reservación:</label>
-                    <input type="text" class="form-control" id="nombreReservacion">
-                </div>
-                <div class="form-group">
-                    <label for="habitacion">Habitación:</label>
-                    <select class="form-control" id="habitacion">
-                        <option value="habitacion1">Habitación 1</option>
-                        <option value="habitacion2">Habitación 2</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="cama">Cama:</label>
-                    <select class="form-control" id="cama">
-                        <option value="cama1">Cama 1</option>
-                        <option value="cama2">Cama 2</option>
-                    </select>
-                </div>
-                <button type="button" class="btn btn-primary" onclick="reservar();">Reservar</button>
-            </form>
-        </div>
-        <div id="reservaMsg" class="reserva-msg">
-            <h2>Reservación realizada correctamente.</h2>
-            <button type="button" class="btn btn-primary" onclick="nuevaReservacion();" id="nuevaReservacionBtn">Nueva Reservación</button>
-        </div>
-    </div>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" type="text/javascript"></script>
-
+    <body onload="mostrarReservacionesActivas();">
+        <div>TODO write content</div>
     </body>
 </html>
