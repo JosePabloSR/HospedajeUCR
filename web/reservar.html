@@ -21,13 +21,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 cama2: true
             }
         };
-
+        // Function to show the data entry form
         function mostrarSolicitudDatos() {
             var reservaBtns = document.querySelector('.vertical-buttons');
             reservaBtns.style.display = 'none';
             document.getElementById('solicitudDatos').style.display = 'block';
         }
-
+        
+        // Function to make a reservation
         function reservar() {
             var entrada = document.getElementById('fechaEntrada').value;
             var horaEntrada = document.getElementById('horaEntrada').value;
@@ -37,7 +38,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             var habitacion = document.getElementById('habitacion').value;
             var cama = document.getElementById('cama').value;
 
-            // Verificar disponibilidad de la cama seleccionada
+            // Check bed availability
             if (!disponibilidadCamas[habitacion][cama]) {
                 alert('La cama seleccionada no está disponible durante ese período de tiempo.');
                 return;
@@ -45,6 +46,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
             var fechaReserva = new Date().toLocaleString();
 
+            // Store reservation data in localStorage
             localStorage.setItem('entrada', entrada);
             localStorage.setItem('horaEntrada', horaEntrada);
             localStorage.setItem('salida', salida);
@@ -54,15 +56,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             localStorage.setItem('habitacion', habitacion);
             localStorage.setItem('cama', cama);
 
-            // Marcar cama como no disponible
+            // Mark bed as unavailable
             disponibilidadCamas[habitacion][cama] = false;
 
+            // Hide the data entry form and show the success message
             document.getElementById('solicitudDatos').style.display = 'none';
             document.getElementById('reservaMsg').style.display = 'block';
             document.getElementById('nuevaReservacionBtn').style.display = 'block';
         }
 
+        // Function to display active reservations
         function mostrarReservacionesActivas() {
+            // Retrieve reservation data from localStorage
             var entrada = localStorage.getItem('entrada');
             var horaEntrada = localStorage.getItem('horaEntrada');
             var salida = localStorage.getItem('salida');

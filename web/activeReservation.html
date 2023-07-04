@@ -5,11 +5,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TODO supply a title</title> <!-- Title of the page -->
+        <meta charset="UTF-8"> <!-- Character encoding -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport settings for mobile responsiveness -->
     <script>
-        // Datos de disponibilidad de las camas
+        // Bed availability data
         var disponibilidadCamas = {
             habitacion1: {
                 cama1: true,
@@ -21,6 +21,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             }
         };
 
+        // Function to show the data entry form
         function mostrarSolicitudDatos() {
             var reservaBtns = document.querySelector('.vertical-buttons');
             reservaBtns.style.display = 'none';
@@ -36,7 +37,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             var habitacion = document.getElementById('habitacion').value;
             var cama = document.getElementById('cama').value;
 
-            // Verificar disponibilidad de la cama seleccionada
+            // Check bed availability
             if (!disponibilidadCamas[habitacion][cama]) {
                 alert('La cama seleccionada no está disponible durante ese período de tiempo.');
                 return;
@@ -53,7 +54,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             localStorage.setItem('habitacion', habitacion);
             localStorage.setItem('cama', cama);
 
-            // Marcar cama como no disponible
+            // Mark bed as unavailable
             disponibilidadCamas[habitacion][cama] = false;
 
             document.getElementById('solicitudDatos').style.display = 'none';
