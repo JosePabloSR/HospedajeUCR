@@ -134,42 +134,44 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <div class="container mt-4">
         <div id="solicitudDatos">
             <h2>Ingrese los datos de la reserva</h2>
-            <form>
+            <form method="post" action="reservationValidation.jsp">
                 <div class="form-group">
                     <label for="fechaEntrada">Fecha de entrada:</label>
-                    <input type="date" class="form-control" id="fechaEntrada">
+                    <input type="date" class="form-control" id="fechaEntrada" name="fechaEntrada" required>
                     <label for="horaEntrada">Hora de entrada:</label>
-                    <select class="form-control" id="horaEntrada"></select>
+                    <select class="form-control" id="horaEntrada" name="horaEntrada" required></select>
                 </div>
                 <div class="form-group">
                     <label for="fechaSalida">Fecha de salida:</label>
-                    <input type="date" class="form-control" id="fechaSalida">
+                    <input type="date" class="form-control" id="fechaSalida" name="fechaSalida" required>
                     <label for="horaSalida">Hora de salida:</label>
-                    <select class="form-control" id="horaSalida"></select>
+                    <select class="form-control" id="horaSalida" name="horaSalida" required></select>
                 </div>
                 <div class="form-group">
                     <label for="nombreReservacion">Nombre de la persona que realizará la reservación:</label>
-                    <input type="text" class="form-control" id="nombreReservacion">
+                    <input type="text" class="form-control" id="nombreReservacion" name="nombreReservacion" required>
                 </div>
                 <div class="form-group">
                     <label for="habitacion">Habitación:</label>
-                    <select class="form-control" id="habitacion">
+                    <select class="form-control" id="habitacion" name="habitacion" required>
                         <option value="habitacion1">Habitación 1</option>
                         <option value="habitacion2">Habitación 2</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="cama">Cama:</label>
-                    <select class="form-control" id="cama">
+                    <select class="form-control" id="cama" name="cama" required>
                         <option value="cama1">Cama 1</option>
                         <option value="cama2">Cama 2</option>
                     </select>
                 </div>
+                    <input type="submit" value="Submit">
                 <button type="button" class="btn btn-primary" onclick="reservar();">Reservar</button>
             </form>
         </div>
         <div id="reservaMsg" class="reserva-msg">
             <h2>Reservación realizada correctamente.</h2>
+        
             <button type="button" class="btn btn-primary" onclick="nuevaReservacion();" id="nuevaReservacionBtn">Nueva Reservación</button>
         </div>
     </div>

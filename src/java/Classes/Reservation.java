@@ -19,11 +19,11 @@ public class Reservation {
     private Date arrive_hour;
     private Date departure_date;
     private Date departure_hour;
-    private String reservator_id;
+    private String reservator_name;
     private String reserved_id;
     private String reserved_name;
 
-    public Reservation(int reservation_id, int room_id, int bed_id, Date arrive_date, Date arrive_hour, Date departure_date, Date departure_hour, String reservator_id, String reserved_id, String reserved_name) {
+    public Reservation(int reservation_id, int room_id, int bed_id, Date arrive_date, Date arrive_hour, Date departure_date, Date departure_hour, String reservator_name, String reserved_id, String reserved_name) {
         this.reservation_id = reservation_id;
         this.room_id = room_id;
         this.bed_id = bed_id;
@@ -31,7 +31,7 @@ public class Reservation {
         this.arrive_hour = arrive_hour;
         this.departure_date = departure_date;
         this.departure_hour = departure_hour;
-        this.reservator_id = reservator_id;
+        this.reservator_name = reservator_name;
         this.reserved_id = reserved_id;
         this.reserved_name = reserved_name;
     }
@@ -141,14 +141,14 @@ public class Reservation {
      * @return the reservator_id
      */
     public String getReservator_id() {
-        return reservator_id;
+        return reservator_name;
     }
 
     /**
      * @param reservator_id the reservator_id to set
      */
     public void setReservator_id(String reservator_id) {
-        this.reservator_id = reservator_id;
+        this.reservator_name = reservator_id;
     }
 
     /**
@@ -181,7 +181,7 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Reservation{" + "reservation_id=" + reservation_id + ", room_id=" + room_id + ", bed_id=" + bed_id + ", arrive_date=" + arrive_date + ", arrive_hour=" + arrive_hour + ", departure_date=" + departure_date + ", departure_hour=" + departure_hour + ", reservator_id=" + reservator_id + ", reserved_id=" + reserved_id + ", reserved_name=" + reserved_name + '}';
+        return "Reservation{" + "reservation_id=" + reservation_id + ", room_id=" + room_id + ", bed_id=" + bed_id + ", arrive_date=" + arrive_date + ", arrive_hour=" + arrive_hour + ", departure_date=" + departure_date + ", departure_hour=" + departure_hour + ", reservator_id=" + reservator_name + ", reserved_id=" + reserved_id + ", reserved_name=" + reserved_name + '}';
     }
     
     
