@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <%
 
-    ConnectionMysql mysql = new ConnectionMysql("portal_sede_sur_lodging");
+    ConnectionMysql mysql = new ConnectionMysql("portal_sede_sur_users");
 
     String room_id = request.getParameter("habitacion").trim();
     String bed_id = request.getParameter("cama").trim();
@@ -19,33 +19,15 @@
     String departure_date = request.getParameter("fechaSalida").trim();
     String departure_hour = request.getParameter("horaSalida").trim();
     String reservator_name = request.getParameter("nombreReservacion").trim();
+    String reserved_id = request.getParameter("idReservado").trim();
+    String reserved_name = request.getParameter("nombreReservado").trim();
 
-    String idr = "";
-    switch (room_id) {
 
-        case "habitacion1":
-            idr = "1";
-            break;
-        case "habitacion2":
-            idr = "2";
-            break;
 
-    }
-    String idc = "";
-    switch (room_id) {
-
-        case "cama1":
-            idc = "1";
-            break;
-        case "cama2":
-            idc = "2";
-            break;
-
-    }
 
     System.out.println("Estamos en reserva");
     // Validar el usuario y contraseña
-    if (mysql.insertReservation(idr, idc, arrive_date, arrive_hour, departure_date, departure_hour, reservator_name)) {
+    if (mysql.insertReservation(room_id, bed_id, arrive_date, arrive_hour, departure_date, departure_hour, reservator_name, reserved_id, reserved_name)) {
         // Inicio de sesión exitoso
 
         response.sendRedirect("reservar.html"); // Página de inicio después de iniciar sesión

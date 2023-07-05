@@ -8,174 +8,192 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>Reservaciones</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <script>
-        // Datos de disponibilidad de las camas
-        var disponibilidadCamas = {
-            habitacion1: {
-                cama1: true,
-                cama2: true
-            },
-            habitacion2: {
-                cama1: true,
-                cama2: true
-            }
-        };
-        // Function to show the data entry form
-        function mostrarSolicitudDatos() {
-            var reservaBtns = document.querySelector('.vertical-buttons');
-            reservaBtns.style.display = 'none';
-            document.getElementById('solicitudDatos').style.display = 'block';
-        }
-        
-        // Function to make a reservation
-        function reservar() {
-            var entrada = document.getElementById('fechaEntrada').value;
-            var horaEntrada = document.getElementById('horaEntrada').value;
-            var salida = document.getElementById('fechaSalida').value;
-            var horaSalida = document.getElementById('horaSalida').value;
-            var nombreReservacion = document.getElementById('nombreReservacion').value;
-            var habitacion = document.getElementById('habitacion').value;
-            var cama = document.getElementById('cama').value;
-
-            // Check bed availability
-            if (!disponibilidadCamas[habitacion][cama]) {
-                alert('La cama seleccionada no está disponible durante ese período de tiempo.');
-                return;
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <script>
+            // Datos de disponibilidad de las camas
+            var disponibilidadCamas = {
+                habitacion1: {
+                    cama1: true,
+                    cama2: true
+                },
+                habitacion2: {
+                    cama1: true,
+                    cama2: true
+                }
+            };
+            // Function to show the data entry form
+            function mostrarSolicitudDatos() {
+                var reservaBtns = document.querySelector('.vertical-buttons');
+                reservaBtns.style.display = 'none';
+                document.getElementById('solicitudDatos').style.display = 'block';
             }
 
-            var fechaReserva = new Date().toLocaleString();
+            // Function to make a reservation
+            function reservar() {
+                var entrada = document.getElementById('fechaEntrada').value;
+                var horaEntrada = document.getElementById('horaEntrada').value;
+                var salida = document.getElementById('fechaSalida').value;
+                var horaSalida = document.getElementById('horaSalida').value;
+                var nombreReservacion = document.getElementById('nombreReservacion').value;
+                var idReservado = document.getElementById('idReservado').value;
+                var nombreReservado = document.getElementById('nombreReservado').value;
+                var habitacion = document.getElementById('habitacion').value;
+                var cama = document.getElementById('cama').value;
 
-            // Store reservation data in localStorage
-            localStorage.setItem('entrada', entrada);
-            localStorage.setItem('horaEntrada', horaEntrada);
-            localStorage.setItem('salida', salida);
-            localStorage.setItem('horaSalida', horaSalida);
-            localStorage.setItem('nombreReservacion', nombreReservacion);
-            localStorage.setItem('fechaReserva', fechaReserva);
-            localStorage.setItem('habitacion', habitacion);
-            localStorage.setItem('cama', cama);
+                // Check bed availability
+                if (!disponibilidadCamas[habitacion][cama]) {
+                    alert('La cama seleccionada no está disponible durante ese período de tiempo.');
+                    return;
+                }
 
-            // Mark bed as unavailable
-            disponibilidadCamas[habitacion][cama] = false;
+                var fechaReserva = new Date().toLocaleString();
 
-            // Hide the data entry form and show the success message
-            document.getElementById('solicitudDatos').style.display = 'none';
-            document.getElementById('reservaMsg').style.display = 'block';
-            document.getElementById('nuevaReservacionBtn').style.display = 'block';
-        }
+                // Store reservation data in localStorage
+                localStorage.setItem('entrada', entrada);
+                localStorage.setItem('horaEntrada', horaEntrada);
+                localStorage.setItem('salida', salida);
+                localStorage.setItem('horaSalida', horaSalida);
+                localStorage.setItem('nombreReservacion', nombreReservacion);
+                localStorage.setItem('idReservado', idReservado);
+                localStorage.setItem('nombreReservado', nombreReservado);
+                localStorage.setItem('fechaReserva', fechaReserva);
+                localStorage.setItem('habitacion', habitacion);
+                localStorage.setItem('cama', cama);
 
-        // Function to display active reservations
-        function mostrarReservacionesActivas() {
-            // Retrieve reservation data from localStorage
-            var entrada = localStorage.getItem('entrada');
-            var horaEntrada = localStorage.getItem('horaEntrada');
-            var salida = localStorage.getItem('salida');
-            var horaSalida = localStorage.getItem('horaSalida');
-            var nombreReservacion = localStorage.getItem('nombreReservacion');
-            var fechaReserva = localStorage.getItem('fechaReserva');
-            var habitacion = localStorage.getItem('habitacion');
-            var cama = localStorage.getItem('cama');
-            var mensaje = 'Reservaciones activas:\n\n';
+                // Mark bed as unavailable
+                disponibilidadCamas[habitacion][cama] = false;
 
-            if (entrada && horaEntrada && salida && horaSalida && nombreReservacion && fechaReserva && habitacion && cama) {
-                mensaje += 'Entrada: ' + entrada + ' ' + horaEntrada + '\n';
-                mensaje += 'Salida: ' + salida + ' ' + horaSalida + '\n';
-                mensaje += 'Nombre de la reservación: ' + nombreReservacion + '\n';
-                mensaje += 'Fecha de reserva: ' + fechaReserva + '\n';
-                mensaje += 'Habitación: ' + habitacion + '\n';
-                mensaje += 'Cama: ' + cama;
-            } else {
-                mensaje += 'No hay reservaciones activas.';
+                // Hide the data entry form and show the success message
+                document.getElementById('solicitudDatos').style.display = 'none';
+                document.getElementById('reservaMsg').style.display = 'block';
+                document.getElementById('nuevaReservacionBtn').style.display = 'block';
             }
 
-            alert(mensaje);
-        }
+            // Function to display active reservations
+            function mostrarReservacionesActivas() {
+                // Retrieve reservation data from localStorage
+                var entrada = localStorage.getItem('entrada');
+                var horaEntrada = localStorage.getItem('horaEntrada');
+                var salida = localStorage.getItem('salida');
+                var horaSalida = localStorage.getItem('horaSalida');
+                var nombreReservacion = localStorage.getItem('nombreReservacion');
+                var fechaReserva = localStorage.getItem('fechaReserva');
+                var habitacion = localStorage.getItem('habitacion');
+                var cama = localStorage.getItem('cama');
+                var mensaje = 'Reservaciones activas:\n\n';
 
-        function cargarHoras() {
-            var selectHoraEntrada = document.getElementById('horaEntrada');
-            var selectHoraSalida = document.getElementById('horaSalida');
+                if (entrada && horaEntrada && salida && horaSalida && nombreReservacion && fechaReserva && habitacion && cama) {
+                    mensaje += 'Entrada: ' + entrada + ' ' + horaEntrada + '\n';
+                    mensaje += 'Salida: ' + salida + ' ' + horaSalida + '\n';
+                    mensaje += 'Nombre de la reservación: ' + nombreReservacion + '\n';
+                    mensaje += 'Fecha de reserva: ' + fechaReserva + '\n';
+                    mensaje += 'Habitación: ' + habitacion + '\n';
+                    mensaje += 'Cama: ' + cama;
+                } else {
+                    mensaje += 'No hay reservaciones activas.';
+                }
 
-            for (var hora = 0; hora < 24; hora++) {
-                for (var minuto = 0; minuto < 60; minuto += 30) {
-                    var horaTexto = pad(hora) + ':' + pad(minuto);
-                    var opcionEntrada = new Option(horaTexto, horaTexto);
-                    var opcionSalida = new Option(horaTexto, horaTexto);
-                    selectHoraEntrada.add(opcionEntrada);
-                    selectHoraSalida.add(opcionSalida);
+                alert(mensaje);
+            }
+
+            function cargarHoras() {
+                var selectHoraEntrada = document.getElementById('horaEntrada');
+                var selectHoraSalida = document.getElementById('horaSalida');
+
+                for (var hora = 0; hora < 24; hora++) {
+                    for (var minuto = 0; minuto < 60; minuto += 30) {
+                        var horaTexto = pad(hora) + ':' + pad(minuto);
+                        var opcionEntrada = new Option(horaTexto, horaTexto);
+                        var opcionSalida = new Option(horaTexto, horaTexto);
+                        selectHoraEntrada.add(opcionEntrada);
+                        selectHoraSalida.add(opcionSalida);
+                    }
                 }
             }
-        }
 
-        function pad(valor) {
-            return ('0' + valor).slice(-2);
-        }
+            function pad(valor) {
+                return ('0' + valor).slice(-2);
+            }
 
-        function nuevaReservacion() {
-            document.getElementById('solicitudDatos').style.display = 'block';
-            document.getElementById('reservaMsg').style.display = 'none';
-            document.getElementById('nuevaReservacionBtn').style.display = 'none';
-            limpiarDatosReserva();
-        }
+            function nuevaReservacion() {
+                document.getElementById('solicitudDatos').style.display = 'block';
+                document.getElementById('reservaMsg').style.display = 'none';
+                document.getElementById('nuevaReservacionBtn').style.display = 'none';
+                limpiarDatosReserva();
+            }
 
-        function limpiarDatosReserva() {
-            document.getElementById('fechaEntrada').value = '';
-            document.getElementById('horaEntrada').selectedIndex = 0;
-            document.getElementById('fechaSalida').value = '';
-            document.getElementById('horaSalida').selectedIndex = 0;
-            document.getElementById('nombreReservacion').value = '';
-            document.getElementById('habitacion').selectedIndex = 0;
-            document.getElementById('cama').selectedIndex = 0;
-        }
-    </script>
+            function limpiarDatosReserva() {
+                document.getElementById('fechaEntrada').value = '';
+                document.getElementById('horaEntrada').selectedIndex = 0;
+                document.getElementById('fechaSalida').value = '';
+                document.getElementById('horaSalida').selectedIndex = 0;
+                document.getElementById('nombreReservacion').value = '';
+                document.getElementById('idReservado').value = '';
+                document.getElementById('idReservado').value = '';
+                document.getElementById('habitacion').selectedIndex = 0;
+                document.getElementById('cama').selectedIndex = 0;
+            }
+        </script>
     </head>
 
     <body onload="cargarHoras();">
         <div class="container mt-4">
-        <div id="solicitudDatos">
-            <h2>Ingrese los datos de la reserva</h2>
-            <form method="post" action="reservationValidation.jsp">
-                <div class="form-group">
-                    <label for="fechaEntrada">Fecha de entrada:</label>
-                    <input type="date" class="form-control" id="fechaEntrada" name="fechaEntrada" required>
-                    <label for="horaEntrada">Hora de entrada:</label>
-                    <select class="form-control" id="horaEntrada" name="horaEntrada" required></select>
-                </div>
-                <div class="form-group">
-                    <label for="fechaSalida">Fecha de salida:</label>
-                    <input type="date" class="form-control" id="fechaSalida" name="fechaSalida" required>
-                    <label for="horaSalida">Hora de salida:</label>
-                    <select class="form-control" id="horaSalida" name="horaSalida" required></select>
-                </div>
-                <div class="form-group">
-                    <label for="nombreReservacion">Nombre de la persona que realizará la reservación:</label>
-                    <input type="text" class="form-control" id="nombreReservacion" name="nombreReservacion" required>
-                </div>
-                <div class="form-group">
-                    <label for="habitacion">Habitación:</label>
-                    <select class="form-control" id="habitacion" name="habitacion" required>
-                        <option value="habitacion1">Habitación 1</option>
-                        <option value="habitacion2">Habitación 2</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="cama">Cama:</label>
-                    <select class="form-control" id="cama" name="cama" required>
-                        <option value="cama1">Cama 1</option>
-                        <option value="cama2">Cama 2</option>
-                    </select>
-                </div>
+            <div id="solicitudDatos">
+                <h2>Ingrese los datos de la reserva</h2>
+                <form method="post" action="reservationValidation.jsp">
+                    <div class="form-group">
+                        <label for="fechaEntrada">Fecha de entrada:</label>
+                        <input type="date" class="form-control" id="fechaEntrada" name="fechaEntrada" required>
+                        <label for="horaEntrada">Hora de entrada:</label>
+                        <select class="form-control" id="horaEntrada" name="horaEntrada" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaSalida">Fecha de salida:</label>
+                        <input type="date" class="form-control" id="fechaSalida" name="fechaSalida" required>
+                        <label for="horaSalida">Hora de salida:</label>
+                        <select class="form-control" id="horaSalida" name="horaSalida" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreReservacion">Nombre de la persona que realizará la reservación:</label>
+                        <input type="text" class="form-control" id="nombreReservacion" name="nombreReservacion" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="idReservado">Id de la persona a la que se le realizará la reservación:</label>
+                        <input type="text" class="form-control" id="nombreReservacion" name="idReservado" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreReservado">Nombre de la persona a la que se le realizará la reservación:</label>
+                        <input type="text" class="form-control" id="nombreReservacion" name="nombreReservado" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="habitacion">Habitación:</label>
+                        <select class="form-control" id="habitacion" name="habitacion" required>
+                            <option value="1">Habitación 1</option>
+                            <option value="2">Habitación 2</option>
+                            <option value="3">Habitación 3</option>
+                            <option value="4">Habitación 4</option>
+                            <option value="5">Habitación 5</option>
+                            <option value="6">Habitación 6</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cama">Cama:</label>
+                        <select class="form-control" id="cama" name="cama" required>
+                            <option value="1">Cama 1</option>
+                            <option value="2">Cama 2</option>
+                        </select>
+                    </div>
                     <input type="submit" value="Submit">
-                <button type="button" class="btn btn-primary" onclick="reservar();">Reservar</button>
-            </form>
+                    <button type="button" class="btn btn-primary" onclick="reservar();">Reservar</button>
+                </form>
+            </div>
+            <div id="reservaMsg" class="reserva-msg">
+                <h2>Reservación realizada correctamente.</h2>
+
+                <button type="button" class="btn btn-primary" onclick="nuevaReservacion();" id="nuevaReservacionBtn">Nueva Reservación</button>
+            </div>
         </div>
-        <div id="reservaMsg" class="reserva-msg">
-            <h2>Reservación realizada correctamente.</h2>
-        
-            <button type="button" class="btn btn-primary" onclick="nuevaReservacion();" id="nuevaReservacionBtn">Nueva Reservación</button>
-        </div>
-    </div>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" type="text/javascript"></script>
 
     </body>
 </html>
