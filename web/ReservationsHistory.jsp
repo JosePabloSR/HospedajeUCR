@@ -71,7 +71,7 @@
             <title>Historial de reservaciones</title>
         </head>
         <body>
-            <h1>Tabla de Reservaciones</h1>
+            <h1>Historial de reservaciones</h1>
             <form method="post" action="SearchReservation.jsp">
 
                 <button type="submit" class="btn btn-dark">Buscar reservación</button>
@@ -107,7 +107,7 @@
                     <td><%= reservacion.getReservator_name()%></td>
                     <td><%= reservacion.getReserved_id()%></td>
                     <td><%= reservacion.getReserved_name()%></td>
-                    <td><%= reservacion.getReservation_state()%></td>
+                    <td><%= reservacion.getReservation_state()== null ? "Sin estado" : reservacion.getReservation_state()%></td>
                 </tr>
                 <%
                         temp = temp.siguiente;

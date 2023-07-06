@@ -99,12 +99,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             function cargarHoras() {
                 var selectHoraEntrada = document.getElementById('horaEntrada');
                 var selectHoraSalida = document.getElementById('horaSalida');
-
+                var segundos=0;
                 for (var hora = 0; hora < 24; hora++) {
                     for (var minuto = 0; minuto < 60; minuto += 30) {
-                        var horaTexto = pad(hora) + ':' + pad(minuto);
-                        var opcionEntrada = new Option(horaTexto, horaTexto);
-                        var opcionSalida = new Option(horaTexto, horaTexto);
+                        var horaTexto = pad(hora) + ':' + pad(minuto)+':'+pad(segundos);
+                        var opcionEntrada = new Option(horaTexto, horaTexto, horaTexto);
+                        var opcionSalida = new Option(horaTexto, horaTexto, horaTexto);
                         selectHoraEntrada.add(opcionEntrada);
                         selectHoraSalida.add(opcionSalida);
                     }
@@ -183,15 +183,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <option value="2">Cama 2</option>
                         </select>
                     </div>
-                    <input type="submit" value="Submit">
-                    <button type="button" class="btn btn-primary" onclick="reservar();">Reservar</button>
-                </form>
-            </div>
-            <div id="reservaMsg" class="reserva-msg">
-                <h2>Reservación realizada correctamente.</h2>
-
-                <button type="button" class="btn btn-primary" onclick="nuevaReservacion();" id="nuevaReservacionBtn">Nueva Reservación</button>
-            </div>
+                   <input type="submit" value="Reservar" class="btn-primary">
         </div>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" type="text/javascript"></script>
 

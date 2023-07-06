@@ -56,7 +56,7 @@
                 String nombreReservado = resultSet.getString("reserved_name");
                 String estadoReservacion = resultSet.getString("reservation_state");
 
-                Reservation reservacion = new Reservation(idReservacion,idCuarto, idCama, fechaEntrada, horaEntrada, fechaSalida, horaSalida, nombreReservador, idReservado, nombreReservado, estadoReservacion);
+                Reservation reservacion = new Reservation(idReservacion, idCuarto, idCama, fechaEntrada, horaEntrada, fechaSalida, horaSalida, nombreReservador, idReservado, nombreReservado, estadoReservacion);
 
                 listaEnlazada.agregar(reservacion);
             }
@@ -67,23 +67,8 @@
             e.printStackTrace();
         }
     %>
-    
-        <%-- Función para actualizar el estado de la reservación --%>
-    <%
-        if (request.getParameter("estado") != null && request.getParameter("id") != null) {
-            String nuevoEstado = request.getParameter("estado");
-            String idReservacion = request.getParameter("id");
 
-            try {
-                Statement statement = connection.createStatement();
-                String query = "UPDATE lodging SET reservation_state = '" + nuevoEstado + "' WHERE reserved_id = '" + idReservacion + "'";
-                statement.executeUpdate(query);
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    %>
+    <%-- Función para actualizar el estado de la reservación --%>
 
     <!DOCTYPE html>
     <html>
@@ -92,7 +77,9 @@
         </head>
         <body>
             <h1>Tabla de Reservaciones</h1>
-            <button onclick="location.reload()">Actualizar</button>
+
+
+
             <br></br>
             <table>
                 <tr>
@@ -127,15 +114,26 @@
                     <td><%= reservacion.getReservator_name()%></td>
                     <td><%= reservacion.getReserved_id()%></td>
                     <td><%= reservacion.getReserved_name()%></td>
-                    <td><%= reservacion.getReservation_state()%></td>
-                    <td><div class="form-group">
-                            <label for="cama">Estado</label>
-                            <select class="form-control" id="estado" name="estado" required>
-                                <option value="ocupado">Ocupado</option>
-                                <option value="disponible">Disponible</option>
-                                <option value="En limpieza">En limpieza</option>
-                            </select>
-                        </div></td>
+                    <td><%= reservacion.getReservation_state() == null ? "Sin estado":reservacion.getReservation_state()%></td>
+                    <td><div class="form-group"><form action="UpdateReservation.jsp">
+                                <label for="cama">Estado</label>
+                                <select class="form-control" id="estado" name="ESTADO" required>
+                                    <option value="En espera">En espera</option>
+                                    <option value="Aceptada">Aceptada</option>
+                                    <option value="Rechazada">Rechazada</option>
+                                    <option value="Concluida">concluida</option>
+                                </select>
+                                <input hidden="true"type="text" name="roo_id" id="id" value="<%=reservacion.getRoom_id()%>">
+                                <input hidden="true"type="text" name="be_id" id="id" value="<%=reservacion.getBed_id()%>">
+                                <input hidden="true"type="text" name="arrive_dat" id="id" value="<%=reservacion.getArrive_date()%>">
+                                <input hidden="true"type="text" name="arrive_hou" id="id" value="<%=reservacion.getArrive_hour()%>">
+                                <input hidden="true"type="text" name="departure_dat" id="id" value="<%=reservacion.getDeparture_date()%>">
+                                <input hidden="true"type="text" name="departure_hou" id="id" value="<%=reservacion.getDeparture_hour()%>">
+                                <input hidden="true"type="text" name="reservator_nam" id="id" value="<%=reservacion.getReservator_name()%>">
+                                <input hidden="true"type="text" name="reserv_id" id="id" value="<%=reservacion.getReserved_id()%>">
+                                <input hidden="true"type="text" name="reserved_nam" id="id" value="<%=reservacion.getReserved_name()%>">
+                                <button type="submit" class="btn btn-dark">actualizar</button>
+                        </div></td></form>
                     <td><form action="DeleteReservation.jsp">
                             <input 
                                 hidden="true"

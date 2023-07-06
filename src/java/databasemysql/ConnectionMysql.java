@@ -4,6 +4,8 @@
  */
 package databasemysql;
 
+import Classes.Linkedlist;
+import Classes.Reservation;
 import Users.User;
 import java.sql.Connection;
 import java.sql.Date;
@@ -193,31 +195,15 @@ public class ConnectionMysql {
     }
 
     public boolean insertReservation(String room_id, String bed_id, String arrive_date, String arrive_hour, String departure_date, String departure_hour, String reservator_name, String reserved_id, String reserved_name) throws SQLException, ParseException {
-        System.out.println("room_id: " + room_id);
-        System.out.println("bed_id: " + bed_id);
-        System.out.println("arrive_date" + arrive_date);
-        System.out.println("arrive_hour" + arrive_hour);
-        System.out.println("departure_date" + departure_date);
-        System.out.println("departure_hour" + departure_hour);
-        System.out.println("reservator_name" + reservator_name);
-//        String arrive_dates2 = arrive_date.replace("-", "/");
-//        String departure_dates2 = arrive_date.replace("-", "/");
-//        System.out.println("arrive_date " + arrive_dates2);
         int room_ids = Integer.parseInt(room_id);
         int bed_ids = Integer.parseInt(bed_id);
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         LocalTime arrive_hours = parsearHora(arrive_hour);
         Time tiempoBD = Time.valueOf(arrive_hours);
-//        Date arrive_dates = (Date) formato.parse(arrive_dates2);
         java.sql.Date arrive_dates = new java.sql.Date(formato.parse(arrive_date).getTime());
-//         Date arrive_hours = (Date) formato2. parse(arrive_hour);
-//        Date departure_dates = (Date) formato.parse(departure_dates2);
         java.sql.Date departure_dates = new java.sql.Date(formato.parse(departure_date).getTime());
         LocalTime departure_hours = parsearHora(departure_hour);
         Time tiempoBDs = Time.valueOf(departure_hours);
-//         Date departure_hours = (Date) formato2. parse(departure_hour);
-
-        System.out.println("departure_hours" + departure_hours);
         try {
             // the mysql insert statement
             String query = " insert into lodging (room_id, bed_id, arrive_date, arrive_hour, departure_date, departure_hour, reservator_name, reserved_id, reserved_name)"
@@ -237,16 +223,44 @@ public class ConnectionMysql {
             // execute the preparedstatement
             preparedStmt.execute();
 
+            int room_ids2 = Integer.parseInt(room_id);
+            int bed_ids2 = Integer.parseInt(bed_id);
+            SimpleDateFormat formato2 = new SimpleDateFormat("yyyy-MM-dd");
+            LocalTime arrive_hours2 = parsearHora(arrive_hour);
+            Time tiempoBD2 = Time.valueOf(arrive_hours);
+            java.sql.Date arrive_dates2 = new java.sql.Date(formato.parse(arrive_date).getTime());
+            java.sql.Date departure_dates2 = new java.sql.Date(formato.parse(departure_date).getTime());
+            LocalTime departure_hours2 = parsearHora(departure_hour);
+            Time tiempoBDs2 = Time.valueOf(departure_hours);
+            String reservator_names = reservator_name;
+            String reserved_ids = reserved_id;
+            String reserved_names = reserved_name;
+
+            String query2 = " insert into hosting_history (room_id, bed_id, arrive_date, arrive_hour, departure_date, departure_hour, reservator_name, reserved_id, reserved_name)"
+                    + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // create the mysql insert preparedstatement
+            PreparedStatement preparedStmt2 = cx.prepareStatement(query2);
+            preparedStmt2.setInt(1, room_ids2);
+            preparedStmt2.setInt(2, bed_ids2);
+            preparedStmt2.setDate(3, arrive_dates2);
+            preparedStmt2.setTime(4, tiempoBD2);
+            preparedStmt2.setDate(5, departure_dates2);
+            preparedStmt2.setTime(6, tiempoBDs2);
+            preparedStmt2.setString(7, reservator_names);
+            preparedStmt2.setString(8, reserved_ids);
+            preparedStmt2.setString(9, reserved_names);
+            preparedStmt2.execute();
             cx.close();
             return true;
         } catch (Exception ex) {
             System.out.println("Fallo la inserción" + ex.getMessage());
         }
+
         return false;
     }
 
     public LocalTime parsearHora(String arrive_hour) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalTime hora = null;
 
         try {
@@ -256,6 +270,74 @@ public class ConnectionMysql {
         }
 
         return hora;
+    }
+
+    public boolean deleteReservation(String reserved_id) {
+        try {
+
+            String query = "delete from lodging where reserved_id = ?";
+            PreparedStatement preparedStmt = cx.prepareStatement(query);
+            preparedStmt.setString(1, reserved_id);
+
+            // execute the preparedstatement
+            preparedStmt.execute();
+
+            cx.close();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+            return false;
+        }
+
+    }
+
+    public boolean updateReservationState(String room_id, String bed_id, String arrive_date, String arrive_hour, String departure_date, String departure_hour, String reservator_name, String reserved_name, String reserved_id, String reservation_state) {
+//        String reservations_state = reservation_state;
+        try {
+            System.out.println("reservation_state = " + reservation_state);
+            System.out.println("reserved_id = " + reserved_id);
+            String query = "UPDATE lodging SET reservation_state = ? WHERE reserved_id = " + reserved_id + ";";
+
+            PreparedStatement preparedStmt = cx.prepareStatement(query);
+
+            preparedStmt.setString(1, reservation_state);
+
+            // execute the preparedstatement
+            preparedStmt.executeUpdate();
+            
+        int room_ids2 = Integer.parseInt(room_id);
+        int bed_ids2 = Integer.parseInt(bed_id);
+        SimpleDateFormat formato3 = new SimpleDateFormat("yyyy-MM-dd");
+        LocalTime arrive_hours2 = parsearHora(arrive_hour);
+        Time tiempoBD3 = Time.valueOf(arrive_hours2);
+        java.sql.Date arrive_dates2 = new java.sql.Date(formato3.parse(arrive_date).getTime());
+        java.sql.Date departure_dates2 = new java.sql.Date(formato3.parse(departure_date).getTime());
+        LocalTime departure_hours2 = parsearHora(departure_hour);
+        Time tiempoBDs3 = Time.valueOf(departure_hours2);
+            String query2 = " insert into hosting_history (room_id, bed_id, arrive_date, arrive_hour, departure_date, departure_hour, reservator_name, reserved_id, reserved_name, reservation_state)"
+                    + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            // create the mysql insert preparedstatement
+            PreparedStatement preparedStmt2 = cx.prepareStatement(query2);
+            preparedStmt2.setInt(1, room_ids2);
+            preparedStmt2.setInt(2, bed_ids2);
+            preparedStmt2.setDate(3, (Date) arrive_dates2);
+            preparedStmt2.setTime(4, (Time) tiempoBD3);
+            preparedStmt2.setDate(5, (Date) departure_dates2);
+            preparedStmt2.setTime(6, (Time) tiempoBDs3);
+            preparedStmt2.setString(7, reservator_name);
+            preparedStmt2.setString(8, reserved_id);
+            preparedStmt2.setString(9, reserved_name);
+            preparedStmt2.setString(10, reservation_state);
+            preparedStmt2.execute();
+            cx.close();
+            return true;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+            return false;
+        }
+
     }
 
 }

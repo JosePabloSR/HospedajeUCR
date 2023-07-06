@@ -50,6 +50,11 @@ public class Reservation {
         this.reserved_name = reserved_name;
         this.reservation_state=reservation_state;
     }
+        
+        public Reservation(String reserved_id, String reservation_state){
+        this.reserved_id=reserved_id;
+        this.reservation_state=reservation_state;
+        }
 
     public Reservation() {
     }
