@@ -4,6 +4,7 @@
  */
 package Classes;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -16,14 +17,15 @@ public class Reservation {
     private int room_id;
     private int bed_id;
     private Date arrive_date;
-    private Date arrive_hour;
+    private Time arrive_hour;
     private Date departure_date;
-    private Date departure_hour;
+    private Time departure_hour;
     private String reservator_name;
     private String reserved_id;
     private String reserved_name;
+    private String reservation_state;
 
-    public Reservation(int reservation_id, int room_id, int bed_id, Date arrive_date, Date arrive_hour, Date departure_date, Date departure_hour, String reservator_name, String reserved_id, String reserved_name) {
+    public Reservation(int reservation_id, int room_id, int bed_id, Date arrive_date, Time arrive_hour, Date departure_date, Time departure_hour, String reservator_name, String reserved_id, String reserved_name, String reservation_state) {
         this.reservation_id = reservation_id;
         this.room_id = room_id;
         this.bed_id = bed_id;
@@ -34,6 +36,19 @@ public class Reservation {
         this.reservator_name = reservator_name;
         this.reserved_id = reserved_id;
         this.reserved_name = reserved_name;
+        this.reservation_state=reservation_state;
+    }
+        public Reservation(int room_id, int bed_id, Date arrive_date, Time arrive_hour, Date departure_date, Time departure_hour, String reservator_name, String reserved_id, String reserved_name, String reservation_state) {
+        this.room_id = room_id;
+        this.bed_id = bed_id;
+        this.arrive_date = arrive_date;
+        this.arrive_hour = arrive_hour;
+        this.departure_date = departure_date;
+        this.departure_hour = departure_hour;
+        this.reservator_name = reservator_name;
+        this.reserved_id = reserved_id;
+        this.reserved_name = reserved_name;
+        this.reservation_state=reservation_state;
     }
 
     public Reservation() {
@@ -105,7 +120,7 @@ public class Reservation {
     /**
      * @param arrive_hour the arrive_hour to set
      */
-    public void setArrive_hour(Date arrive_hour) {
+    public void setArrive_hour(Time arrive_hour) {
         this.arrive_hour = arrive_hour;
     }
 
@@ -133,22 +148,22 @@ public class Reservation {
     /**
      * @param departure_hour the departure_hour to set
      */
-    public void setDeparture_hour(Date departure_hour) {
+    public void setDeparture_hour(Time departure_hour) {
         this.departure_hour = departure_hour;
     }
 
     /**
      * @return the reservator_id
      */
-    public String getReservator_id() {
+    public String getReservator_name() {
         return reservator_name;
     }
 
     /**
-     * @param reservator_id the reservator_id to set
+     * @param reservator_name
      */
-    public void setReservator_id(String reservator_id) {
-        this.reservator_name = reservator_id;
+    public void setReservator_name(String reservator_name) {
+        this.reservator_name = reservator_name;
     }
 
     /**
@@ -178,10 +193,25 @@ public class Reservation {
     public void setReserved_name(String reserved_name) {
         this.reserved_name = reserved_name;
     }
+    /**
+     * 
+     * @param reservation_state 
+     */
+    public String getReservation_state(){
+    return reservation_state;
+    }
+/**
+ * 
+ * @param reservation_state 
+ */
+    public void setReservation_state(String reservation_state) {
+        this.reservation_state = reservation_state;
+    }
+    
 
     @Override
     public String toString() {
-        return "Reservation{" + "reservation_id=" + reservation_id + ", room_id=" + room_id + ", bed_id=" + bed_id + ", arrive_date=" + arrive_date + ", arrive_hour=" + arrive_hour + ", departure_date=" + departure_date + ", departure_hour=" + departure_hour + ", reservator_id=" + reservator_name + ", reserved_id=" + reserved_id + ", reserved_name=" + reserved_name + '}';
+        return "Reservation{" + "reservation_id=" + reservation_id + ", room_id=" + room_id + ", bed_id=" + bed_id + ", arrive_date=" + arrive_date + ", arrive_hour=" + arrive_hour + ", departure_date=" + departure_date + ", departure_hour=" + departure_hour + ", reservator_id=" + reservator_name + ", reserved_id=" + reserved_id + ", reserved_name=" + reserved_name + ", reservation_state"+ reservation_state+'}';
     }
     
     
