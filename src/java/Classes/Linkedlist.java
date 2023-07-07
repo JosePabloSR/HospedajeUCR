@@ -5,31 +5,44 @@
 package Classes;
 
 /**
- *
- * @author dilan
+ * Linkedlist represents a singly linked list data structure.
+ * It allows adding reservations and retrieving the head node.
+ * The "cabeza" represents the first node in the linked list.
  */
 public class Linkedlist {
-        Node cabeza;
+    Node head;
     
+    /**
+     * Constructor for LinkedList class.
+     * Initializes the "head" of the linked list to null.
+     */
     public Linkedlist() {
-        this.cabeza = null;
+        this.head = null;
     }
 
-    public void agregar(Reservation reservacion) {
-        Node nuevoNodo = new Node(reservacion);
+    /**
+     * Adds a reservation to the singly linked list.
+     * @param reservation The Reservation object to be added.
+     */
+    public void add(Reservation reservation) {
+        Node newNode = new Node(reservation);
 
-        if (cabeza == null) {
-            cabeza = nuevoNodo;
+        if (head == null) {
+            head = newNode;
         } else {
-            Node temp = cabeza;
-            while (temp.getSiguiente() != null) {
-                temp = temp.getSiguiente();
+            Node temp = head;
+            while (temp.getNext() != null) {
+                temp = temp.getNext();
             }
-            temp.setSiguiente(nuevoNodo);
+            temp.setNext(newNode);
         }
     }
 
-    public Node getCabeza() {
-        return cabeza;
+    /**
+     * Retrieves the head node of the singly linked list.
+     * @return The head node.
+     */
+    public Node getHead() {
+        return head;
     }
 }

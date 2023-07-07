@@ -1,9 +1,8 @@
-<%-- 
-    Document   : ReservationsInProcess
-    Created on : 6 jul. 2023, 13:55:52
-    Author     : dilan
+<%--
+    Document: ReservationsInProcess
+    Created on: 6th July 2023, 13:55:52
+    Author: dilan
 --%>
-
 
 <%@page import="Classes.NodeDoubleLinked"%>
 <%@page import="databasemysql.ConnectionMysql"%>
@@ -17,20 +16,21 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.Statement" %>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%-- Establecer la conexión con la base de datos --%>
-<%CircularLinkedList listas = new CircularLinkedList();%>
+
+<%-- Establish the connection with the database --%>
+<% CircularLinkedList listas = new CircularLinkedList(); %>
 <%
     ConnectionMysql mysql = new ConnectionMysql("portal_sede_sur_users");
     Connection connection = mysql.conectar();
     try {
         Statement statement = connection.createStatement();
 
-        // Consultar los datos desde la base de datos
+        // Retrieve data from the database
         String query = "SELECT * FROM lodging;";
         ResultSet resultSet = statement.executeQuery(query);
 
         listas.clear();
-        // Crear la lista enlazada circular y cargar los datos
+        // Create a circular linked list and load the data
         while (resultSet.next()) {
             int reservation_id = resultSet.getInt("reservation_id");
             int room_id = resultSet.getInt("room_id");
@@ -53,17 +53,18 @@
         statement.close();
         connection.close();
 
-        // Filtrar los datos según los criterios requeridos
+        // Filter the data based on the required criteria
         listas.filterByState("Concluida");
     } catch (Exception e) {
         e.printStackTrace();
     }
 %>
+
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Tabla de Historial de Reservas</title>
-                <style>
+        <title>Reservation History Table</title>
+        <style>
             table {
                 border-collapse: collapse;
             }
@@ -84,14 +85,14 @@
     </head>
 
     <body>
-        <h1>Tabla de Historial de Reservas</h1>
+        <h1>Reservation History Table</h1>
         <table>
             <tr>
                 <th>Reservation ID</th>
                 <th>Room ID</th>
                 <th>Bed ID</th>
-                <th>Arrive Date</th>
-                <th>Arrive Hour</th>
+                <th>Arrival Date</th>
+                <th>Arrival Hour</th>
                 <th>Departure Date</th>
                 <th>Departure Hour</th>
                 <th>Reservator Name</th>

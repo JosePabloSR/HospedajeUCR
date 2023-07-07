@@ -5,29 +5,46 @@
 package Classes;
 
 /**
- *
- * @author dilan
+ * Node represents a node in a linked list.
+ * It contains a reservation object and references to the next and previous nodes.
  */
 public class Node {
-    Reservation reservacion;
-     Node siguiente;
-     Node anterior;
+    Reservation reservation;
+    Node next;
+    Node previous;
 
-    public Node(Reservation reservacion) {
-        this.reservacion = reservacion;
-        this.siguiente = null;
-        this.anterior = null;
+    /**
+     * Constructor for the Node class.
+     * Initializes the reservation and sets next and previous nodes to null.
+     * @param reservation The Reservation object to be stored in the node.
+     */
+    public Node(Reservation reservation) {
+        this.reservation = reservation;
+        this.next = null;
+        this.previous = null;
     }
 
-    public Reservation getReservacion() {
-        return reservacion;
+    /**
+     * Retrieves the reservation stored in the node.
+     * @return The Reservation object.
+     */
+    public Reservation getReservation() {
+        return reservation;
     }
 
-    public Node getSiguiente() {
-        return siguiente;
+    /**
+     * Retrieves the next node.
+     * @return The next node.
+     */
+    public Node getNext() {
+        return next;
     }
 
-    public void setSiguiente(Node siguiente) {
-        this.siguiente = siguiente;
+    /**
+     * Sets the next node.
+     * @param next The next node to be set.
+     */
+    public void setNext(Node next) {
+        this.next = next;
     }
 }

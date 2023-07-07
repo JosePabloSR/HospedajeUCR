@@ -76,7 +76,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Resultados de búsqueda</title>
+        <title>Search Results</title>
         <style>
             table {
                 border-collapse: collapse;
@@ -88,22 +88,21 @@
         </style>
     </head>
     <body>
-        <h1>Resultados de búsqueda</h1>
+        <h1>Search Results</h1>
         <% if (!searchResults.isEmpty()) { %>
         <table>
             <tr>
-                <th>ID de reservación</th>
-                <th>ID de habitación</th>
-                <th>ID de cama</th>
-                <th>Fecha de entrada</th>
-                <th>Hora de entrada</th>
-                <th>Fecha de salida</th>
-                <th>Hora de salida</th>
-                <th>Nombre del reservador</th>
-                <th>ID de reservado</th>
-                <th>Nombre de reservado</th>
-                <th>Estado de la reservación</th>
-
+                <th>Reservation ID</th>
+                <th>Room ID</th>
+                <th>Bed ID</th>
+                <th>Arrival Date</th>
+                <th>Arrival Hour</th>
+                <th>Departure Date</th>
+                <th>Departure Hour</th>
+                <th>Reservator Name</th>
+                <th>Reserved ID</th>
+                <th>Reserved Name</th>
+                <th>Reservation State</th>
             </tr>
             <% for (Reservation result : searchResults) {%>
             <tr>
@@ -117,15 +116,12 @@
                 <td><%= result.getReservator_name()%></td>
                 <td><%= result.getReserved_id()%></td>
                 <td><%= result.getReserved_name()%></td>
-                <td><%= result.getReservation_state() == null ? "Sin estado" : result.getReservation_state()%></td>
-
-
+                <td><%= result.getReservation_state() == null ? "No state" : result.getReservation_state()%></td>
             </tr>
             <% } %>
-
         </table>
         <% } else { %>
-        <p>No se encontraron resultados para la búsqueda.</p>
-        <% }%>
+        <p>No results found for the search.</p>
+        <% } %>
     </body>
 </html>

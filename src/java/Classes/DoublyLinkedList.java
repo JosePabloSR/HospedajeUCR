@@ -5,34 +5,52 @@
 package Classes;
 
 /**
- *
- * @author dilan
+ * DoublyLinkedList represents a doubly linked list data structure.
+ * It allows adding reservations and checking if the list is empty.
+ * The head represents the first node in the linked list.
  */
 public class DoublyLinkedList {
-         NodeDoubleLinked head;
+    NodeDoubleLinked head;
 
+    /**
+     * Constructor for DoublyLinkedList class.
+     * Initializes the head of the linked list to null.
+     */
     public DoublyLinkedList() {
         this.head = null;
     }
 
-    public boolean estaVacia() {
+    /**
+     * Checks if the doubly linked list is empty.
+     * @return true if the list is empty, false otherwise.
+     */
+    public boolean isEmpty() {
         return head == null;
     }
 
-    public void agregarReservacion(Reservation reserva) {
-        NodeDoubleLinked nuevoNodo = new NodeDoubleLinked(reserva);
-        if (estaVacia()) {
-            head = nuevoNodo;
+    /**
+     * Adds a reservation to the doubly linked list.
+     * @param reservation The Reservation object to be added.
+     */
+    public void addReservation(Reservation reservation) {
+        NodeDoubleLinked newNode = new NodeDoubleLinked(reservation);
+        if (isEmpty()) {
+            head = newNode;
         } else {
             NodeDoubleLinked temp = head;
-            while (temp.siguiente != null) {
-                temp = temp.siguiente;
+            while (temp.next != null) {
+                temp = temp.next;
             }
-            temp.siguiente = nuevoNodo;
-            nuevoNodo.anterior = temp;
+            temp.next = newNode;
+            newNode.previous = temp;
         }
     }
-        public NodeDoubleLinked getHead() {
+
+    /**
+     * Retrieves the head node of the doubly linked list.
+     * @return The head node.
+     */
+    public NodeDoubleLinked getHead() {
         return head;
     }
 }

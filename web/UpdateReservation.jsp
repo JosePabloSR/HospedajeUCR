@@ -1,7 +1,7 @@
-<%-- 
-    Document   : UpdateReservation
-    Created on : 6 jul. 2023, 11:54:33
-    Author     : dilan
+<%--
+    Document: UpdateReservation
+    Created on: 6th July 2023, 11:54:33
+    Author: dilan
 --%>
 
 <%@page import="databasemysql.ConnectionMysql"%>
@@ -23,15 +23,12 @@
     String reserved_id = request.getParameter("reserv_id");
     String reservation_state = request.getParameter("ESTADO");
 
-
-
-    // Validar el usuario y contraseña
-    if (mysql.updateReservationState(room_id,bed_id,arrive_date,arrive_hour,departure_date,departure_hour,reservator_name,reserved_name,reserved_id, reservation_state)) {
-        // Inicio de sesión exitoso
-
-        response.sendRedirect("Reservations.jsp"); // Página de inicio después de iniciar sesión
+    // Validate the username and password
+    if (mysql.updateReservationState(room_id, bed_id, arrive_date, arrive_hour, departure_date, departure_hour, reservator_name, reserved_name, reserved_id, reservation_state)) {
+        // Successful login
+        response.sendRedirect("Reservations.jsp"); // Home page after successful login
     } else {
-        // Inicio de sesión fallido
-        out.println("<script>alert('No se puede actualizar'); window.location.href='index.html';</script>");
+        // Failed login
+        out.println("<script>alert('Cannot update'); window.location.href='index.html';</script>");
     }
 %>

@@ -5,8 +5,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
     <head>
-        <!-- This is the principal page -->
-        <title>Hospedaje UCR</title> <!-- Title of the webpage -->
+        <!-- This is the main page -->
+        <title>UCR Accommodation</title> <!-- Title of the webpage -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="CSS.css" rel="stylesheet" type="text/css"/>
@@ -15,70 +15,58 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             .headier {
                 background-color: #41ade7;
                 background-size: 7px;
-                font-size: 25px; /* Tamaño de fuente */
-                font-weight: bold; /* Grosor de fuente */
+                font-size: 25px; /* Font size */
+                font-weight: bold; /* Font weight */
                 border-bottom: 2px solid black;
                 border-bottom-color: #323232;
-                
-
             }
-            .footer{
+            .footer {
                 background-color: #323232;
                 position: absolute;
                 bottom: 0;
                 width: 100%;
                 color: #ffffff;
             }
-            .UCR-img{
+            .UCR-img {
                 width: 125px;
                 height: auto;
             }
-            .btn{
+            .btn {
                 width: 200px;
-                
             }
         </style>
     </head>
     <body>
 
         <h1 class="headier">
-            <img src="UCR_LOGO.png" alt="Texto alternativo de la imagen" class="UCR-img"> Universidad de Costa Rica. Servicio de hospedajes para profesores.
+            <img src="UCR_LOGO.png" alt="Alternative text for the image" class="UCR-img"> University of Costa Rica. Faculty Accommodation Service.
         </h1>
 
 
         <div id="sidebar"> 
             <div class="toggle-btn">    
-
                 <span> &#9776;</span>
             </div>
             <ul class="">
                 <li>  <img src="UCR_LOGO_NEGRO.png" alt=""/> </li>
                 <li>
                     <form method="post" action="reservar.html">
-
-                        <button type="submit" class="btn btn-dark">Reservar</button>
-
+                        <button type="submit" class="btn btn-dark">Reserve</button>
                     </form>
                 </li> 
                 <li>
                     <form method="post" action="Reservations.jsp">
-
-                        <button type="submit" class="btn btn-dark">Reservaciones</button>
-
+                        <button type="submit" class="btn btn-dark">Reservations</button>
                     </form>
                 </li> 
                 <li>
                     <form method="post" action="ReservationsHistory.jsp">
-
-                        <button type="submit" class="btn btn-dark">Historial de reservaciones</button>
-
+                        <button type="submit" class="btn btn-dark">Reservation History</button>
                     </form>
                 </li> 
                 <li>
                     <form method="post" action="ReservationsInProcess.jsp">
-
-                        <button type="submit" class="btn btn-dark">Reservaciones en proceso</button>
-
+                        <button type="submit" class="btn btn-dark">Reservations in Process</button>
                     </form>
                 </li>
             </ul>

@@ -10,122 +10,122 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport settings for mobile responsiveness -->
     <script>
         // Bed availability data
-        var disponibilidadCamas = {
-            habitacion1: {
-                cama1: true,
-                cama2: true
+        var bedAvailability = {
+            room1: {
+                bed1: true,
+                bed2: true
             },
-            habitacion2: {
-                cama1: true,
-                cama2: true
+            room2: {
+                bed1: true,
+                bed2: true
             }
         };
 
         // Function to show the data entry form
-        function mostrarSolicitudDatos() {
-            var reservaBtns = document.querySelector('.vertical-buttons');
-            reservaBtns.style.display = 'none';
-            document.getElementById('solicitudDatos').style.display = 'block';
+        function showDataEntryForm() {
+            var reservationBtns = document.querySelector('.vertical-buttons');
+            reservationBtns.style.display = 'none';
+            document.getElementById('dataEntryForm').style.display = 'block';
         }
 
-        function reservar() {
-            var entrada = document.getElementById('fechaEntrada').value;
-            var horaEntrada = document.getElementById('horaEntrada').value;
-            var salida = document.getElementById('fechaSalida').value;
-            var horaSalida = document.getElementById('horaSalida').value;
-            var nombreReservacion = document.getElementById('nombreReservacion').value;
-            var habitacion = document.getElementById('habitacion').value;
-            var cama = document.getElementById('cama').value;
+        function makeReservation() {
+            var arrivalDate = document.getElementById('arrivalDate').value;
+            var arrivalTime = document.getElementById('arrivalTime').value;
+            var departureDate = document.getElementById('departureDate').value;
+            var departureTime = document.getElementById('departureTime').value;
+            var reservationName = document.getElementById('reservationName').value;
+            var room = document.getElementById('room').value;
+            var bed = document.getElementById('bed').value;
 
             // Check bed availability
-            if (!disponibilidadCamas[habitacion][cama]) {
-                alert('La cama seleccionada no está disponible durante ese período de tiempo.');
+            if (!bedAvailability[room][bed]) {
+                alert('The selected bed is not available during that time period.');
                 return;
             }
 
-            var fechaReserva = new Date().toLocaleString();
+            var reservationDate = new Date().toLocaleString();
 
-            localStorage.setItem('entrada', entrada);
-            localStorage.setItem('horaEntrada', horaEntrada);
-            localStorage.setItem('salida', salida);
-            localStorage.setItem('horaSalida', horaSalida);
-            localStorage.setItem('nombreReservacion', nombreReservacion);
-            localStorage.setItem('fechaReserva', fechaReserva);
-            localStorage.setItem('habitacion', habitacion);
-            localStorage.setItem('cama', cama);
+            localStorage.setItem('arrivalDate', arrivalDate);
+            localStorage.setItem('arrivalTime', arrivalTime);
+            localStorage.setItem('departureDate', departureDate);
+            localStorage.setItem('departureTime', departureTime);
+            localStorage.setItem('reservationName', reservationName);
+            localStorage.setItem('reservationDate', reservationDate);
+            localStorage.setItem('room', room);
+            localStorage.setItem('bed', bed);
 
             // Mark bed as unavailable
-            disponibilidadCamas[habitacion][cama] = false;
+            bedAvailability[room][bed] = false;
 
-            document.getElementById('solicitudDatos').style.display = 'none';
-            document.getElementById('reservaMsg').style.display = 'block';
-            document.getElementById('nuevaReservacionBtn').style.display = 'block';
+            document.getElementById('dataEntryForm').style.display = 'none';
+            document.getElementById('reservationMsg').style.display = 'block';
+            document.getElementById('newReservationBtn').style.display = 'block';
         }
 
-        function mostrarReservacionesActivas() {
-            var entrada = localStorage.getItem('entrada');
-            var horaEntrada = localStorage.getItem('horaEntrada');
-            var salida = localStorage.getItem('salida');
-            var horaSalida = localStorage.getItem('horaSalida');
-            var nombreReservacion = localStorage.getItem('nombreReservacion');
-            var fechaReserva = localStorage.getItem('fechaReserva');
-            var habitacion = localStorage.getItem('habitacion');
-            var cama = localStorage.getItem('cama');
-            var mensaje = 'Reservaciones activas:\n\n';
+        function showActiveReservations() {
+            var arrivalDate = localStorage.getItem('arrivalDate');
+            var arrivalTime = localStorage.getItem('arrivalTime');
+            var departureDate = localStorage.getItem('departureDate');
+            var departureTime = localStorage.getItem('departureTime');
+            var reservationName = localStorage.getItem('reservationName');
+            var reservationDate = localStorage.getItem('reservationDate');
+            var room = localStorage.getItem('room');
+            var bed = localStorage.getItem('bed');
+            var message = 'Active Reservations:\n\n';
 
-            if (entrada && horaEntrada && salida && horaSalida && nombreReservacion && fechaReserva && habitacion && cama) {
-                mensaje += 'Entrada: ' + entrada + ' ' + horaEntrada + '\n';
-                mensaje += 'Salida: ' + salida + ' ' + horaSalida + '\n';
-                mensaje += 'Nombre de la reservación: ' + nombreReservacion + '\n';
-                mensaje += 'Fecha de reserva: ' + fechaReserva + '\n';
-                mensaje += 'Habitación: ' + habitacion + '\n';
-                mensaje += 'Cama: ' + cama;
+            if (arrivalDate && arrivalTime && departureDate && departureTime && reservationName && reservationDate && room && bed) {
+                message += 'Arrival: ' + arrivalDate + ' ' + arrivalTime + '\n';
+                message += 'Departure: ' + departureDate + ' ' + departureTime + '\n';
+                message += 'Reservation Name: ' + reservationName + '\n';
+                message += 'Reservation Date: ' + reservationDate + '\n';
+                message += 'Room: ' + room + '\n';
+                message += 'Bed: ' + bed;
             } else {
-                mensaje += 'No hay reservaciones activas.';
+                message += 'No active reservations.';
             }
 
-            alert(mensaje);
+            alert(message);
         }
 
-        function cargarHoras() {
-            var selectHoraEntrada = document.getElementById('horaEntrada');
-            var selectHoraSalida = document.getElementById('horaSalida');
+        function loadTimes() {
+            var selectArrivalTime = document.getElementById('arrivalTime');
+            var selectDepartureTime = document.getElementById('departureTime');
 
-            for (var hora = 0; hora < 24; hora++) {
-                for (var minuto = 0; minuto < 60; minuto += 30) {
-                    var horaTexto = pad(hora) + ':' + pad(minuto);
-                    var opcionEntrada = new Option(horaTexto, horaTexto);
-                    var opcionSalida = new Option(horaTexto, horaTexto);
-                    selectHoraEntrada.add(opcionEntrada);
-                    selectHoraSalida.add(opcionSalida);
+            for (var hour = 0; hour < 24; hour++) {
+                for (var minute = 0; minute < 60; minute += 30) {
+                    var timeText = pad(hour) + ':' + pad(minute);
+                    var arrivalOption = new Option(timeText, timeText);
+                    var departureOption = new Option(timeText, timeText);
+                    selectArrivalTime.add(arrivalOption);
+                    selectDepartureTime.add(departureOption);
                 }
             }
         }
 
-        function pad(valor) {
-            return ('0' + valor).slice(-2);
+        function pad(value) {
+            return ('0' + value).slice(-2);
         }
 
-        function nuevaReservacion() {
-            document.getElementById('solicitudDatos').style.display = 'block';
-            document.getElementById('reservaMsg').style.display = 'none';
-            document.getElementById('nuevaReservacionBtn').style.display = 'none';
-            limpiarDatosReserva();
+        function newReservation() {
+            document.getElementById('dataEntryForm').style.display = 'block';
+            document.getElementById('reservationMsg').style.display = 'none';
+            document.getElementById('newReservationBtn').style.display = 'none';
+            clearReservationData();
         }
 
-        function limpiarDatosReserva() {
-            document.getElementById('fechaEntrada').value = '';
-            document.getElementById('horaEntrada').selectedIndex = 0;
-            document.getElementById('fechaSalida').value = '';
-            document.getElementById('horaSalida').selectedIndex = 0;
-            document.getElementById('nombreReservacion').value = '';
-            document.getElementById('habitacion').selectedIndex = 0;
-            document.getElementById('cama').selectedIndex = 0;
+        function clearReservationData() {
+            document.getElementById('arrivalDate').value = '';
+            document.getElementById('arrivalTime').selectedIndex = 0;
+            document.getElementById('departureDate').value = '';
+            document.getElementById('departureTime').selectedIndex = 0;
+            document.getElementById('reservationName').value = '';
+            document.getElementById('room').selectedIndex = 0;
+            document.getElementById('bed').selectedIndex = 0;
         }
     </script>
     </head>
 
-    <body onload="mostrarReservacionesActivas();">
+    <body onload="showActiveReservations();">
         <div>TODO write content</div>
     </body>
 </html>
