@@ -99,10 +99,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             function cargarHoras() {
                 var selectHoraEntrada = document.getElementById('horaEntrada');
                 var selectHoraSalida = document.getElementById('horaSalida');
-                var segundos=0;
+                var segundos = 0;
                 for (var hora = 0; hora < 24; hora++) {
                     for (var minuto = 0; minuto < 60; minuto += 30) {
-                        var horaTexto = pad(hora) + ':' + pad(minuto)+':'+pad(segundos);
+                        var horaTexto = pad(hora) + ':' + pad(minuto) + ':' + pad(segundos);
                         var opcionEntrada = new Option(horaTexto, horaTexto, horaTexto);
                         var opcionSalida = new Option(horaTexto, horaTexto, horaTexto);
                         selectHoraEntrada.add(opcionEntrada);
@@ -133,6 +133,48 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 document.getElementById('habitacion').selectedIndex = 0;
                 document.getElementById('cama').selectedIndex = 0;
             }
+            let data = [];
+            function addData(event) {
+                event.preventDefault(); // Evita que el formulario se envíe y la página se recargue
+
+                // Obtén los valores ingresados en el formulario
+                const nombreReservacion = document.querySelector('input[name="nombreReservacion"]').value;
+                const idReservado = document.querySelector('input[name="idReservado"]').value;
+                const nombreReservado = document.querySelector('input[name="nombreReservado"]').value;
+                // Agrega los datos al array
+                data.push({nombreReservado, idReservado, nombreReservacion});
+
+                // Actualiza la lista de datos
+                updateDataList();
+            }
+
+            function updateDataList() {
+                const dataList = document.getElementById('dataList');
+                dataList.innerHTML = '';
+
+                // Agrega los elementos del array como elementos de lista
+                for (let i = 0; i < data.length; i++) {
+                    const li = document.createElement('li');
+                    li.textContent = `nombreReservacion ${data[i].nombreReservacion}, idReservado ${data[i].idReservado}, nombreReservado ${data[i].nombreReservado}`;
+                    dataList.appendChild(li);
+                }
+            }
+
+            function sortData() {
+                // Realiza el ordenamiento por inserción
+                for (let i = 1; i < data.length; i++) {
+                    const key = data[i];
+                    let j = i - 1;
+                    while (j >= 0 && data[j].name.toLowerCase() > key.name.toLowerCase()) {
+                        data[j + 1] = data[j];
+                        j = j - 1;
+                    }
+                    data[j + 1] = key;
+                }
+
+                // Actualiza la lista de datos ordenados
+                updateDataList();
+            }
         </script>
     </head>
 
@@ -155,16 +197,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </div>
                     <div class="form-group">
                         <label for="nombreReservacion">Nombre de la persona que realizará la reservación:</label>
-                        <input type="text" class="form-control" id="nombreReservacion" name="nombreReservacion" required>
+                        <input type="text" class="form-control" id="nombreReservacion" name="nombreReservacion"placeholder="nombreReservacion" required>
                     </div>
                     <div class="form-group">
                         <label for="idReservado">Id de la persona a la que se le realizará la reservación:</label>
-                        <input type="text" class="form-control" id="nombreReservacion" name="idReservado" required>
+                        <input type="text" class="form-control" id="nombreReservacion" name="idReservado"placeholder="idReservado" required>
                     </div>
                     <div class="form-group">
                         <label for="nombreReservado">Nombre de la persona a la que se le realizará la reservación:</label>
-                        <input type="text" class="form-control" id="nombreReservacion" name="nombreReservado" required>
-                    </div>
+                        <input type="text" class="form-control" id="nombreReservacion" name="nombreReservado" placeholder="nombreReservado" required>
+                                  </div>
                     <div class="form-group">
                         <label for="habitacion">Habitación:</label>
                         <select class="form-control" id="habitacion" name="habitacion" required>
@@ -183,9 +225,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <option value="2">Cama 2</option>
                         </select>
                     </div>
-                   <input type="submit" value="Reservar" class="btn-primary">
-        </div>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" type="text/javascript"></script>
+                    <input type="submit" value="Reservar" class="btn-primary" onclick="addData(event)>
+                    </div>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" type="text/javascript"></script>
 
-    </body>
-</html>
+                    </body>
+                    </html>

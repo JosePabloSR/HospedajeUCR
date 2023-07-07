@@ -27,6 +27,15 @@
                 border: 1px solid black;
                 padding: 8px;
             }
+            .container {
+                position: relative;
+            }
+
+            .btn-right {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
         </style>
     </head>
     <%
@@ -35,7 +44,7 @@
     %>
     <%
         DoublyLinkedList listaEnlazada = new DoublyLinkedList();
-        // Obtener datos de la tabla y construir la lista enlazada
+       
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM hosting_history");
@@ -73,9 +82,16 @@
         <body>
             <h1>Historial de reservaciones</h1>
             <form method="post" action="SearchReservation.jsp">
-
+                <div class="form-group">
+                    <label for="searchName">Digite el nombre de la persona reservada que desea buscar:</label>
+                    <input type="text" class="form-control" id="searchName" name="searchName" required>
+                </div>
                 <button type="submit" class="btn btn-dark">Buscar reservación</button>
 
+            </form>
+            <br></br>
+            <form method="post" action="DeleteAllData.jsp">
+                <button type="submit" class="btn-right">Eliminar todos los datos</button>
             </form>
             <br></br>
             <table>
@@ -91,7 +107,7 @@
                     <th>Nombre Reservado</th>
                     <th>Estado Reservación</th>
                 </tr>
-                <%-- Iterar sobre la lista enlazada y generar las filas de la tabla --%>
+                
                 <%
                     NodeDoubleLinked temp = listaEnlazada.getHead();
                     while (temp != null) {
@@ -107,7 +123,7 @@
                     <td><%= reservacion.getReservator_name()%></td>
                     <td><%= reservacion.getReserved_id()%></td>
                     <td><%= reservacion.getReserved_name()%></td>
-                    <td><%= reservacion.getReservation_state()== null ? "Sin estado" : reservacion.getReservation_state()%></td>
+                    <td><%= reservacion.getReservation_state() == null ? "Sin estado" : reservacion.getReservation_state()%></td>
                 </tr>
                 <%
                         temp = temp.siguiente;
@@ -116,3 +132,5 @@
             </table>
         </body>
     </html>
+
+
