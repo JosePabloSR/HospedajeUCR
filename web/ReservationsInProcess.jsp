@@ -63,6 +63,24 @@
 <html>
     <head>
         <title>Tabla de Historial de Reservas</title>
+                <style>
+            table {
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid black;
+                padding: 8px;
+            }
+            .container {
+                position: relative;
+            }
+
+            .btn-right {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+        </style>
     </head>
 
     <body>
