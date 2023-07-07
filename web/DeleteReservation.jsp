@@ -13,7 +13,7 @@
     ConnectionMysql mysql = new ConnectionMysql("portal_sede_sur_users");   
 
     // Retrieving the ID of the reservation to be deleted from the request parameter
-    String reserved_id = request.getParameter("eliminar");
+    String reserved_id = request.getParameter("delete");
     System.out.println("reserved_id: " + reserved_id);
 
     // Validating the user and password

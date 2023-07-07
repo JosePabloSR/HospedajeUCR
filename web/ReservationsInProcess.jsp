@@ -21,7 +21,7 @@
 <% CircularLinkedList listas = new CircularLinkedList(); %>
 <%
     ConnectionMysql mysql = new ConnectionMysql("portal_sede_sur_users");
-    Connection connection = mysql.conectar();
+    Connection connection = mysql.connect();
     try {
         Statement statement = connection.createStatement();
 
@@ -88,17 +88,17 @@
         <h1>Reservation History Table</h1>
         <table>
             <tr>
-                <th>Reservation ID</th>
-                <th>Room ID</th>
-                <th>Bed ID</th>
-                <th>Arrival Date</th>
-                <th>Arrival Hour</th>
-                <th>Departure Date</th>
-                <th>Departure Hour</th>
-                <th>Reservator Name</th>
-                <th>Reserved ID</th>
-                <th>Reserved Name</th>
-                <th>Reservation State</th>
+                <th>Id de la reservación</th>
+                <th>Id del cuarto</th>
+                <th>Id de la cama</th>
+                <th>Fecha de entrada</th>
+                <th>Hora de entrada</th>
+                <th>Fecha de salida</th>
+                <th>Hora de salida</th>
+                <th>Nombre del reservador</th>
+                <th>Id del reservado</th>
+                <th>Nombre del reservado</th>
+                <th>Estado de la reservación</th>
             </tr>
             <% NodeCircular current = listas.getHead();
                 while (current != null && current.getNext() != listas.getHead()) {

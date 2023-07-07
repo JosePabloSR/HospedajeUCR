@@ -7,7 +7,7 @@ package Users;
 import java.sql.Date;
 
 /**
- *
+ * Represents a user in the system.
  * @author ucr
  */
 public class User {
@@ -48,7 +48,16 @@ public class User {
         this.dateCreated = dateCreated;
         this.appAccess = appAccess;
     }
-
+    /**
+     * Constructor for existing users with update date.
+     * @param id The ID of the user.
+     * @param userName The username of the user.
+     * @param password The password of the user.
+     * @param acLevel The access level of the user.
+     * @param dateCreated The date the user was created.
+     * @param appAccess The application access of the user.
+     * @param dateUpdate The date the user was last updated.
+     */
     public User(int id, String userName, String password, String acLevel, 
             Date dateCreated, String appAccess, Date dateUpdate) {
      this.id = id;
@@ -60,105 +69,122 @@ public class User {
         this.updateDate = dateUpdate;
     }
 
-    /**
-     * @return the id
+   /**
+     * Get the ID of the user.
+     * @return The ID of the user.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Set the ID of the user.
+     * @param id The ID to set.
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * @return the userName
+     * Get the username of the user.
+     * @return The username of the user.
      */
     public String getUserName() {
         return userName;
     }
 
     /**
-     * @param userName the userName to set
+     * Set the username of the user.
+     * @param userName The username to set.
      */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
     /**
-     * @return the password
+     * Get the password of the user.
+     * @return The password of the user.
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * @param password the password to set
+     * Set the password of the user.
+     * @param password The password to set.
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
-     * @return the accessLevel
+     * Get the access level of the user.
+     * @return The access level of the user.
      */
     public String getAccessLevel() {
         return accessLevel;
     }
 
     /**
-     * @param accessLevel the accessLevel to set
+     * Set the access level of the user.
+     * @param accessLevel The access level to set.
      */
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
     }
 
     /**
-     * @return the dateCreated
+     * Get the date the user was created.
+     * @return The date the user was created.
      */
     public Date getDateCreated() {
         return dateCreated;
     }
 
     /**
-     * @param dateCreated the dateCreated to set
+     * Set the date the user was created.
+     * @param dateCreated The date to set.
      */
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
     /**
-     * @return the appAccess
+     * Get the application access of the user.
+     * @return The application access of the user.
      */
     public String getAppAccess() {
         return appAccess;
     }
 
     /**
-     * @param appAccess the appAccess to set
+     * Set the application access of the user.
+     * @param appAccess The application access to set.
      */
     public void setAppAccess(String appAccess) {
         this.appAccess = appAccess;
     }
 
     /**
-     * @return the updateDate
+     * Get the date the user was last updated.
+     * @return The date the user was last updated.
      */
     public Date getUpdateDate() {
         return updateDate;
     }
 
     /**
-     * @param updateDate the updateDate to set
+     * Set the date the user was last updated.
+     * @param updateDate The date to set.
      */
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 
     @Override
+    /**
+     * 
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("User{id=").append(id);
@@ -169,9 +195,5 @@ public class User {
         sb.append(", appAccess=").append(appAccess);
         sb.append('}');
         return sb.toString();
-    }
-    
-    
-    
-    
+    } 
 }

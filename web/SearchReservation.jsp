@@ -12,7 +12,7 @@
 <%
     String searchName = request.getParameter("searchName");
     ConnectionMysql mysql = new ConnectionMysql("portal_sede_sur_users");
-    Connection connection = mysql.conectar();
+    Connection connection = mysql.connect();
 
     String query = "SELECT * FROM hosting_history WHERE reserved_name = '" + searchName + "'";
     Statement statement = connection.createStatement();
@@ -33,7 +33,9 @@
         String reserved_name = resultSet.getString("reserved_name");
         String reservation_state = resultSet.getString("reservation_state");
 
-        Reservation history = new Reservation(reservation_id, room_id, bed_id, arrive_date, arrive_hour, departure_date, departure_hour, reservator_name, reserved_id, reserved_name, reservation_state);
+        Reservation history = new Reservation(reservation_id, room_id, bed_id, 
+                arrive_date, arrive_hour, departure_date, departure_hour, 
+                reservator_name, reserved_id, reserved_name, reservation_state);
         dataList.add(history);
     }
 
@@ -47,7 +49,8 @@
         }
     });
 
-    int index = Collections.binarySearch(dataList, new Reservation(searchName), new Comparator<Reservation>() {
+    int index = Collections.binarySearch(dataList, new Reservation(searchName),
+            new Comparator<Reservation>() {
         public int compare(Reservation r1, Reservation r2) {
             return r1.getReserved_name().compareTo(r2.getReserved_name());
         }
@@ -60,14 +63,16 @@
 
 
         int leftIndex = index - 1;
-        while (leftIndex >= 0 && dataList.get(leftIndex).getReserved_name().equals(searchName)) {
+        while (leftIndex >= 0 && dataList.get(leftIndex).
+                getReserved_name().equals(searchName)) {
             searchResults.add(dataList.get(leftIndex));
             leftIndex--;
         }
 
 
         int rightIndex = index + 1;
-        while (rightIndex < dataList.size() && dataList.get(rightIndex).getReserved_name().equals(searchName)) {
+        while (rightIndex < dataList.size() && dataList.get(rightIndex).
+                getReserved_name().equals(searchName)) {
             searchResults.add(dataList.get(rightIndex));
             rightIndex++;
         }
@@ -116,7 +121,8 @@
                 <td><%= result.getReservator_name()%></td>
                 <td><%= result.getReserved_id()%></td>
                 <td><%= result.getReserved_name()%></td>
-                <td><%= result.getReservation_state() == null ? "No state" : result.getReservation_state()%></td>
+                <td><%= result.getReservation_state() == null ? "No state" : 
+                        result.getReservation_state()%></td>
             </tr>
             <% } %>
         </table>

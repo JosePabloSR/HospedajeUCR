@@ -13,7 +13,7 @@
 <%
   // Establishing a connection to the MySQL database
   ConnectionMysql mysql = new ConnectionMysql("portal_sede_sur_users");
-  Connection connection = mysql.conectar();
+  Connection connection = mysql.connect();
 
   try {
     // Creating a statement object for executing SQL queries

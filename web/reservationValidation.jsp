@@ -31,6 +31,6 @@
         response.sendRedirect("reservar.html"); // Redirect to the home page after successful reservation
     } else {
         // Failed reservation
-        out.println("<script>alert('Incorrect data'); window.location.href='Registro.jsp';</script>");
+        out.println("<script>alert('Incorrect data'); window.location.href='index.html';</script>");
     }
 %>

@@ -83,7 +83,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 var bed = localStorage.getItem('bed');
                 var message = 'Active reservations:\n\n';
 
-                if (checkInDate && checkInTime && checkOutDate && checkOutTime && reservationName && reservationDate && room && bed) {
+                if (checkInDate && checkInTime && checkOutDate 
+                        && checkOutTime && reservationName && 
+                        reservationDate && room && bed) {
                     message += 'Check-in: ' + checkInDate + ' ' + checkInTime + '\n';
                     message += 'Check-out: ' + checkOutDate + ' ' + checkOutTime + '\n';
                     message += 'Reservation Name: ' + reservationName + '\n';
@@ -103,9 +105,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 var seconds = 0;
                 for (var hour = 0; hour < 24; hour++) {
                     for (var minute = 0; minute < 60; minute += 30) {
-                        var timeText = pad(hour) + ':' + pad(minute) + ':' + pad(seconds);
-                        var checkInOption = new Option(timeText, timeText, timeText);
-                        var checkOutOption = new Option(timeText, timeText, timeText);
+                        var timeText = pad(hour) + ':' + pad
+                        (minute) + ':' + pad(seconds);
+                        var checkInOption = new Option
+                        (timeText, timeText, timeText);
+                        var checkOutOption = new Option
+                        (timeText, timeText, timeText);
                         selectCheckInTime.add(checkInOption);
                         selectCheckOutTime.add(checkOutOption);
                     }
@@ -117,9 +122,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             }
 
             function newReservation() {
-                document.getElementById('dataEntryForm').style.display = 'block';
-                document.getElementById('reservationMsg').style.display = 'none';
-                document.getElementById('newReservationBtn').style.display = 'none';
+                document.getElementById('dataEntryForm')
+                        .style.display = 'block';
+                document.getElementById('reservationMsg')
+                        .style.display = 'none';
+                document.getElementById('newReservationBtn')
+                        .style.display = 'none';
                 clearReservationData();
             }
 
@@ -141,9 +149,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 event.preventDefault(); // Prevent form submission and page reload
 
                 // Get the values entered in the form
-                const reservationName = document.querySelector('input[name="reservationName"]').value;
-                const reservedId = document.querySelector('input[name="reservedId"]').value;
-                const reservedName = document.querySelector('input[name="reservedName"]').value;
+                const reservationName = document.querySelector(
+                        'input[name="reservationName"]').value;
+                const reservedId = document.querySelector
+                ('input[name="reservedId"]').value;
+                const reservedName = document.querySelector
+                ('input[name="reservedName"]').value;
                 
                 // Add the data to the array
                 data.push({ reservedName, reservedId, reservationName });
@@ -159,7 +170,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 // Add array elements as list items
                 for (let i = 0; i < data.length; i++) {
                     const li = document.createElement('li');
-                    li.textContent = `Reservation Name: ${data[i].reservationName}, Reserved ID: ${data[i].reservedId}, Reserved Name: ${data[i].reservedName}`;
+                    li.textContent = `Reservation Name: 
+                    ${data[i].reservationName}, Reserved ID: 
+                    ${data[i].reservedId}, Reserved Name: 
+                    ${data[i].reservedName}`;
                     dataList.appendChild(li);
                 }
             }
@@ -169,7 +183,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 for (let i = 1; i < data.length; i++) {
                     const key = data[i];
                     let j = i - 1;
-                    while (j >= 0 && data[j].name.toLowerCase() > key.name.toLowerCase()) {
+                    while (j >= 0 && data[j].name.toLowerCase() > 
+                            key.name.toLowerCase()) {
                         data[j + 1] = data[j];
                        j = j - 1;
                     }
@@ -188,52 +203,63 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <h2>Enter Reservation Details</h2>
                 <form method="post" action="reservationValidation.jsp">
                     <div class="form-group">
-                        <label for="checkInDate">Check-in Date:</label>
-                        <input type="date" class="form-control" id="checkInDate" name="checkInDate" required>
-                        <label for="checkInTime">Check-in Time:</label>
-                        <select class="form-control" id="checkInTime" name="checkInTime" required></select>
+                        <label for="checkInDate">Fecha de entrada:</label>
+                        <input type="date" class="form-control" id="
+                               checkInDate" name="checkInDate" required>
+                        <label for="checkInTime">Hora de entrada:</label>
+                        <select class="form-control" id="checkInTime"
+                                name="checkInTime" required></select>
                     </div>
                     <div class="form-group">
-                        <label for="checkOutDate">Check-out Date:</label>
-                        <input type="date" class="form-control" id="checkOutDate" name="checkOutDate" required>
-                        <label for="checkOutTime">Check-out Time:</label>
-                        <select class="form-control" id="checkOutTime" name="checkOutTime" required></select>
+                        <label for="checkOutDate">Fecha de salida:</label>
+                        <input type="date" class="form-control" 
+                               id="checkOutDate" name="checkOutDate" required>
+                        <label for="checkOutTime">Hora de salida:</label>
+                        <select class="form-control" id="checkOutTime" 
+                                name="checkOutTime" required></select>
                     </div>
                     <div class="form-group">
-                        <label for="reservationName">Reservation Name:</label>
-                        <input type="text" class="form-control" id="reservationName" name="reservationName" placeholder="Reservation Name" required>
+                        <label for="reservationName">Nombre del reservador:</label>
+                        <input type="text" class="form-control" 
+                               id="reservationName" name="reservationName" 
+                               placeholder="Reservation Name" required>
                     </div>
                     <div class="form-group">
-                        <label for="reservedId">Reserved Person ID:</label>
-                        <input type="text" class="form-control" id="reservedId" name="reservedId" placeholder="Reserved ID" required>
+                        <label for="reservedId">Id del reservado:</label>
+                        <input type="text" class="form-control" 
+                               id="reservedId" name="reservedId" 
+                               placeholder="Reserved ID" required>
                     </div>
                     <div class="form-group">
-                        <label for="reservedName">Reserved Person Name:</label>
-                        <input type="text" class="form-control" id="reservedName" name="reservedName" placeholder="Reserved Name" required>
+                        <label for="reservedName">Nombre del reservado:</label>
+                        <input type="text" class="form-control" 
+                               id="reservedName" name="reservedName" 
+                               placeholder="Reserved Name" required>
                     </div>
                     <div class="form-group">
-                        <label for="room">Room:</label>
-                        <select class="form-control" id="room" name="room" required>
-                            <option value="1">Room 1</option>
-                            <option value="2">Room 2</option>
-                            <option value="3">Room 3</option>
-                            <option value="4">Room 4</option>
-                            <option value="5">Room 5</option>
-                            <option value="6">Room 6</option>
+                        <label for="room">Habitación:</label>
+                        <select class="form-control" id="room" name="room" 
+                                required>
+                            <option value="1">Habitación 1</option>
+                            <option value="2">Habitación 2</option>
+                            <option value="3">Habitación 3</option>
+                            <option value="4">Habitación 4</option>
+                            <option value="5">Habitación 5</option>
+                            <option value="6">Habitación 6</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="bed">Bed:</label>
-                        <select class="form-control" id="bed" name="bed" required>
-                            <option value="1">Bed 1</option>
-                            <option value="2">Bed 2</option>
+                        <label for="bed">Cama:</label>
+                        <select class="form-control" id="bed" name="bed" 
+                                required>
+                            <option value="1">cama 1</option>
+                            <option value="2">cama 2</option>
                         </select>
                     </div>
-                    <input type="submit" value="Reserve" class="btn-primary" onclick="addData(event)">
+                    <input type="submit" value="Reservar" class="btn-primary" 
+                           onclick="addData(event)>
                 </form>
-            </div>
-            <ul id="dataList"></ul>
-        </div>
+
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" type="text/javascript"></script>
     </body>
 </html>

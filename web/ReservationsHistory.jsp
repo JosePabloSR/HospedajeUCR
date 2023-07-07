@@ -47,7 +47,8 @@
    
     try {
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("SELECT * FROM hosting_history");
+        ResultSet resultSet = 
+                statement.executeQuery("SELECT * FROM hosting_history");
 
         while (resultSet.next()) {
             // Extracting reservation data from the result set
@@ -63,8 +64,10 @@
             String reservationState = resultSet.getString("reservation_state");
 
             // Creating a Reservation object
-            Reservation reservation = new Reservation(roomId, bedId, arrivalDate, arrivalTime,
-                    departureDate, departureTime, reserverName, reservedId, reservedName, reservationState);
+            Reservation reservation = new Reservation(roomId, bedId, 
+                    arrivalDate, arrivalTime,
+                    departureDate, departureTime, reserverName, reservedId, 
+                    reservedName, reservationState);
 
             // Adding the reservation object to the doubly linked list
             linkedList.addReservation(reservation);
@@ -86,28 +89,31 @@
         <h1>Reservation History</h1>
         <form method="post" action="SearchReservation.jsp">
             <div class="form-group">
-                <label for="searchName">Enter the name of the reserved person you want to search:</label>
-                <input type="text" class="form-control" id="searchName" name="searchName" required>
+                <label for="searchName">Digite el nombre de la persona que desea
+                    buscar:</label>
+                <input type="text" class="form-control" id="searchName"
+                       name="searchName" required>
             </div>
-            <button type="submit" class="btn btn-dark">Search Reservation</button>
+            <button type="submit" class="btn btn-dark">Buscar</button>
         </form>
         <br></br>
         <form method="post" action="DeleteAllData.jsp">
-            <button type="submit" class="btn-right">Delete All Data</button>
+            <button type="submit" class="btn-right">Eliminar toda la información
+                de la tabla</button>
         </form>
         <br></br>
         <table>
             <tr>
-                <th>Room ID</th>
-                <th>Bed ID</th>
-                <th>Arrival Date</th>
-                <th>Arrival Time</th>
-                <th>Departure Date</th>
-                <th>Departure Time</th>
-                <th>Reserver Name</th>
-                <th>Reserved ID</th>
-                <th>Reserved Name</th>
-                <th>Reservation State</th>
+                <th>Id del cuarto</th>
+                <th>Id de la cama</th>
+                <th>Fecha de entrada</th>
+                <th>Hora de entrada</th>
+                <th>Fecha de salida</th>
+                <th>Hora de salida</th>
+                <th>Nombre del reservador</th>
+                <th>Id del reservado</th>
+                <th>Nombre del reservado</th>
+                <th>Estado de la reservación</th>
             </tr>
             
             <%-- Iterate over the doubly linked list and generate table rows --%>
@@ -117,16 +123,17 @@
                     Reservation reservation = temp.getReservation();
             %>
             <tr>
-                <td><%= reservation.getRoomId()%></td>
-                <td><%= reservation.getBedId()%></td>
-                <td><%= reservation.getArrivalDate()%></td>
-                <td><%= reservation.getArrivalTime()%></td>
-                <td><%= reservation.getDepartureDate()%></td>
-                <td><%= reservation.getDepartureTime()%></td>
-                <td><%= reservation.getReserverName()%></td>
-                <td><%= reservation.getReservedId()%></td>
-                <td><%= reservation.getReservedName()%></td>
-                <td><%= reservation.getReservationState() == null ? "No state" : reservation.getReservationState()%></td>
+                <td><%= reservation.getRoom_id()%></td>
+                <td><%= reservation.getBed_id()%></td>
+                <td><%= reservation.getArrive_date()%></td>
+                <td><%= reservation.getArrive_hour()%></td>
+                <td><%= reservation.getDeparture_date()%></td>
+                <td><%= reservation.getDeparture_hour()%></td>
+                <td><%= reservation.getReservator_name()%></td>
+                <td><%= reservation.getReserved_id()%></td>
+                <td><%= reservation.getReserved_name()%></td>
+                <td><%= reservation.getReservation_state() == null ? "No state"
+                        : reservation.getReservation_state()%></td>
             </tr>
             <%
                     temp = temp.next;

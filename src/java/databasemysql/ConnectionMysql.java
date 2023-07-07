@@ -4,8 +4,6 @@
  */
 package databasemysql;
 
-import Classes.Linkedlist;
-import Classes.Reservation;
 import Users.User;
 import java.sql.Connection;
 import java.sql.Date;
@@ -24,7 +22,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**
+ * This class represents a connection to a MySQL database.
+ * @author dilan
+ */
 public class ConnectionMysql {
 
     // Establecer la conexión
@@ -34,13 +35,19 @@ public class ConnectionMysql {
     String contraseña = "J0s1254";
     String driver = "com.mysql.cj.jdbc.Driver";
     Connection cx;
-
+    /**
+     * Constructs a ConnectionMysql object with the specified database name.
+     * @param bd The name of the database.
+     */
     public ConnectionMysql(String bd) {
         this.bd = bd;
-        cx = conectar();
+        cx = connect();
     }
-
-    public Connection conectar() {
+    /**
+     * Connects to the MySQL database.
+     * @return The connection object.
+     */
+    public Connection connect() {
         try {
             Class.forName(driver);
             try {
@@ -58,7 +65,11 @@ public class ConnectionMysql {
         return cx;
 
     }
-
+    /**
+     * Retrieves a list of users from the database.
+     * @return An ArrayList of User objects.
+     * @throws SQLException If an SQL exception occurs.
+     */
     public ArrayList<User> getUsers() throws SQLException {
         Statement stmt = cx.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM users;");
@@ -89,7 +100,11 @@ public class ConnectionMysql {
 
         }
     }
-
+    /**
+     * Deletes a user with the specified ID from the database.
+     * @param id The ID of the user to be deleted.
+     * @return true if the user was successfully deleted, false otherwise.
+     */
     public boolean deleteUser(int id) {
         try {
 
@@ -109,7 +124,11 @@ public class ConnectionMysql {
         }
 
     }
-
+    /**
+     * Updates a user in the database with the provided user object.
+     * @param user The User object containing the updated information.
+     * @return true if the user was successfully updated, false otherwise.
+     */
     public boolean updateUser(User user) {
         System.out.println(user.toString());
         Calendar calendar = Calendar.getInstance();
@@ -140,9 +159,15 @@ public class ConnectionMysql {
         }
 
     }
-
+    /**
+     * Validates a user's credentials in the database.
+     * @param userName The username of the user.
+     * @param password The password of the user.
+     * @return true if the user's credentials are valid, false otherwise.
+     * @throws SQLException If an SQL exception occurs.
+     */
     public boolean userValidation(String userName, String password) throws SQLException {
-        cx = conectar();
+        cx = connect();
         Statement stmt = cx.createStatement();
         String consulta = "select * from users where user_name ='" + userName.trim() + "' and password = '" + password.trim() + "';";
         System.out.println(consulta);
@@ -163,7 +188,13 @@ public class ConnectionMysql {
         }
 
     }
-
+    /**
+     * Inserts a new user into the database.
+     * @param userName The username of the user.
+     * @param password The password of the user.
+     * @param level The access level of the user.
+     * @return true if the user was successfully inserted, false otherwise.
+     */
     public boolean insertUser(String userName, String password, String level) {
 
         try {
@@ -193,7 +224,21 @@ public class ConnectionMysql {
 
         return false;
     }
-
+    /**
+     * Inserts a new reservation into the database.
+     * @param room_id The ID of the room for the reservation.
+     * @param bed_id The ID of the bed for the reservation.
+     * @param arrive_date The arrival date of the reservation.
+     * @param arrive_hour The arrival hour of the reservation.
+     * @param departure_date The departure date of the reservation.
+     * @param departure_hour The departure hour of the reservation.
+     * @param reservator_name The name of the reservator.
+     * @param reserved_id The ID of the reserved item.
+     * @param reserved_name The name of the reserved item.
+     * @return true if the reservation was successfully inserted, false otherwise.
+     * @throws SQLException If an SQL exception occurs.
+     * @throws ParseException If a parsing exception occurs.
+     */
     public boolean insertReservation(String room_id, String bed_id, String arrive_date, String arrive_hour, String departure_date, String departure_hour, String reservator_name, String reserved_id, String reserved_name) throws SQLException, ParseException {
         int room_ids = Integer.parseInt(room_id);
         int bed_ids = Integer.parseInt(bed_id);
@@ -258,7 +303,11 @@ public class ConnectionMysql {
 
         return false;
     }
-
+    /**
+     * Parses a string representation of an hour into a LocalTime object.
+     * @param arrive_hour The string representation of the hour.
+     * @return The parsed LocalTime object.
+     */
     public LocalTime parsearHora(String arrive_hour) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalTime hora = null;
@@ -271,7 +320,11 @@ public class ConnectionMysql {
 
         return hora;
     }
-
+    /**
+     * Deletes a reservation with the specified reserved ID from the database.
+     * @param reserved_id The reserved ID of the reservation to be deleted.
+     * @return true if the reservation was successfully deleted, false otherwise.
+     */
     public boolean deleteReservation(String reserved_id) {
         try {
 
@@ -291,9 +344,21 @@ public class ConnectionMysql {
         }
 
     }
-
+    /**
+     * Updates the reservation state of a reservation in the database.
+     * @param room_id The ID of the room for the reservation.
+     * @param bed_id The ID of the bed for the reservation.
+     * @param arrive_date The arrival date of the reservation.
+     * @param arrive_hour The arrival hour of the reservation.
+     * @param departure_date The departure date of the reservation.
+     * @param departure_hour The departure hour of the reservation.
+     * @param reservator_name The name of the reservator.
+     * @param reserved_name The name of the reserved item.
+     * @param reserved_id The ID of the reserved item.
+     * @param reservation_state The new reservation state.
+     * @return true if the reservation state was successfully updated, false otherwise.
+     */
     public boolean updateReservationState(String room_id, String bed_id, String arrive_date, String arrive_hour, String departure_date, String departure_hour, String reservator_name, String reserved_name, String reserved_id, String reservation_state) {
-//        String reservations_state = reservation_state;
         try {
             System.out.println("reservation_state = " + reservation_state);
             System.out.println("reserved_id = " + reserved_id);

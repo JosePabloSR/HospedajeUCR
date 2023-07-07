@@ -24,11 +24,14 @@
     String reservation_state = request.getParameter("ESTADO");
 
     // Validate the username and password
-    if (mysql.updateReservationState(room_id, bed_id, arrive_date, arrive_hour, departure_date, departure_hour, reservator_name, reserved_name, reserved_id, reservation_state)) {
+    if (mysql.updateReservationState(room_id, bed_id, arrive_date, arrive_hour, 
+            departure_date, departure_hour, reservator_name, reserved_name, 
+            reserved_id, reservation_state)) {
         // Successful login
         response.sendRedirect("Reservations.jsp"); // Home page after successful login
     } else {
         // Failed login
-        out.println("<script>alert('Cannot update'); window.location.href='index.html';</script>");
+        out.println("<script>alert('Cannot update'); window.location.href='"
+                + "index.html';</script>");
     }
 %>
