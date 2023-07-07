@@ -33,8 +33,8 @@
         String reserved_name = resultSet.getString("reserved_name");
         String reservation_state = resultSet.getString("reservation_state");
 
-        Reservation history = new Reservation(reservation_id, room_id, bed_id, 
-                arrive_date, arrive_hour, departure_date, departure_hour, 
+        Reservation history = new Reservation(reservation_id, room_id, bed_id,
+                arrive_date, arrive_hour, departure_date, departure_hour,
                 reservator_name, reserved_id, reserved_name, reservation_state);
         dataList.add(history);
     }
@@ -61,14 +61,12 @@
 
         searchResults.add(dataList.get(index));
 
-
         int leftIndex = index - 1;
         while (leftIndex >= 0 && dataList.get(leftIndex).
                 getReserved_name().equals(searchName)) {
             searchResults.add(dataList.get(leftIndex));
             leftIndex--;
         }
-
 
         int rightIndex = index + 1;
         while (rightIndex < dataList.size() && dataList.get(rightIndex).
@@ -81,8 +79,26 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
         <title>Search Results</title>
         <style>
+            .headier {
+
+                background-color: #41ade7;
+                background-size: 7px;
+                font-size: 25px; /* Font size */
+                font-weight: bold; /* Font weight */
+                border-bottom: 2px solid black;
+                border-bottom-color: #323232;
+            }
+            .footer {
+
+                background-color: #323232;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                color: #ffffff;
+            }
             table {
                 border-collapse: collapse;
             }
@@ -90,10 +106,20 @@
                 border: 1px solid black;
                 padding: 8px;
             }
+            .bodyColor{
+
+                background-color:  #e6e6e6 ; /* Background color of the body */
+
+            }
         </style>
     </head>
-    <body>
-        <h1>Search Results</h1>
+    <body class="bodyColor">
+        <h1 class="headier">
+            <img src="UCR_LOGO.png" alt="Alternative text for the image" 
+                 class="UCR-img"> Universidad de Costa Rica. 
+            Hospedaje de profesores.
+        </h1>
+        <h2>Resultados de busqueda</h2>
         <% if (!searchResults.isEmpty()) { %>
         <table>
             <tr>
@@ -121,13 +147,18 @@
                 <td><%= result.getReservator_name()%></td>
                 <td><%= result.getReserved_id()%></td>
                 <td><%= result.getReserved_name()%></td>
-                <td><%= result.getReservation_state() == null ? "No state" : 
-                        result.getReservation_state()%></td>
+                    <td><%= result.getReservation_state() == null ? "No state"
+                        : result.getReservation_state()%></td>
             </tr>
             <% } %>
         </table>
         <% } else { %>
-        <p>No results found for the search.</p>
-        <% } %>
+        <p>No se encontraron resultados.</p>
+        <% }%>
+        <footer class="footer">
+            <p>© 2023 Universidad de Costa Rica - Tel. 2511-4000. 
+                Aviso Legal. 
+                Última actualización: julio, 2023</p>
+        </footer>
     </body>
 </html>

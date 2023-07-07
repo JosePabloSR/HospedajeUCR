@@ -54,6 +54,32 @@
 <html>
     <head>
         <style>
+
+            .headier {
+
+                background-color: #41ade7;
+                background-size: 200px;
+                font-size: 25px; /* Font size */
+                font-weight: bold; /* Font weight */
+                border-bottom: 2px solid black;
+                border-bottom-color: #323232;
+
+
+            }
+            .footer {
+            
+            background-color: #323232;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            color: #ffffff;
+            }
+            .UCR-img {
+                width: 125px;
+                height: auto;
+            }
+
+
             table {
                 border-collapse: collapse;
             }
@@ -70,28 +96,40 @@
                 top: 0;
                 right: 0;
             }
+
+            .bodyColor{
+
+                background-color:  #e6e6e6 ; /* Background color of the body */
+
+            }
+
         </style>
         <title>Reservation Table</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     </head>
-    <body>
-        <h1>Reservation Table</h1>
-
+    <body class="bodyColor">
+        <h1 class="headier">
+            <img src="UCR_LOGO.png" alt="Alternative text for the image" 
+                 class="UCR-img"> Universidad de Costa Rica. 
+            Hospedaje de profesores.
+        </h1>
+        <h2>Reservaciones</h2>
         <br></br>
         <table>
             <tr>
-                <th>Reservation ID</th>
-                <th>Room ID</th>
-                <th>Bed ID</th>
-                <th>Arrival Date</th>
-                <th>Arrival Time</th>
-                <th>Departure Date</th>
-                <th>Departure Time</th>
-                <th>Reserver Name</th>
-                <th>Reserved ID</th>
-                <th>Reserved Name</th>
-                <th>Reservation State</th>
-                <th>Change State</th>
-                <th>Reservation Options</th>
+                <th>Id de reservación</th>
+                <th>Id del cuarto</th>
+                <th>Id de la cama</th>
+                <th>Fecha de entrada</th>
+                <th>Hora de entrada</th>
+                <th>Fecha de salida</th>
+                <th>Hora de salida</th>
+                <th>Nombre del reservador</th>
+                <th>Id del reservado</th>
+                <th>Nombre del reservado</th>
+                <th>Estado de la reservación</th>
+                <th>Cambio de estado</th>
+                <th>Opciones de reservación</th>
             </tr>
             <%-- Iterate over the linked list and generate table rows --%>
             <%
@@ -151,7 +189,7 @@
                                    id="id" 
                                    value="<%=reservation.getReserved_name()%>">
                             <button type="submit" 
-                                    class="btn btn-dark">Update</button>
+                                    class="btn btn-success">Actualizar</button>
                         </form>
                     </div>
                 </td>
@@ -159,12 +197,19 @@
                     <form action="DeleteReservation.jsp">
                         <input hidden="true" type="text" name="delete" id="id" 
                                value="<%=reservation.getReserved_id()%>">
-                        <input class="bottom-100" type="submit" value="Delete">
+                                                    <button type="submit" 
+                                    class="btn btn-danger" value="Delete"
+                                    >Eliminar</button>
+                        
                     </form>
                 </td>
             </tr>
             <% temp = temp.getNext();
                 }%>
         </table>
+        <footer class="footer">
+            <p>© 2023 Universidad de Costa Rica - Tel. 2511-4000. Aviso Legal. 
+                Última actualización: julio, 2023</p>
+        </footer>
     </body>
 </html>

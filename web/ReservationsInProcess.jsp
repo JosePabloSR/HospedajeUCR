@@ -63,8 +63,35 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Reservation History Table</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <title>Reservations</title>
         <style>
+            .headier {
+                background-color: #41ade7;
+                background-size: 7px;
+                font-size: 25px; /* Font size */
+                font-weight: bold; /* Font weight */
+                border-bottom: 2px solid black;
+                border-bottom-color: #323232;
+            }
+            .footer {
+                background-color: #323232;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                color: #ffffff;
+            }
+            .UCR-img {
+                width: 125px;
+                height: auto;
+            }
+
+
+            .bodyColor{
+
+                background-color:  #e6e6e6 ; /* Background color of the body */
+
+            }
             table {
                 border-collapse: collapse;
             }
@@ -84,8 +111,13 @@
         </style>
     </head>
 
-    <body>
-        <h1>Reservation History Table</h1>
+    <body class="bodyColor">
+        <h1 class="headier">
+            <img src="UCR_LOGO.png" alt="Alternative text for the image" 
+                 class="UCR-img"> Universidad de Costa Rica. 
+            Hospedaje de profesores.
+        </h1>
+        <h2>Tabla de reservaciones conluidas</h2>
         <table>
             <tr>
                 <th>Id de la reservación</th>
@@ -124,5 +156,9 @@
                     current = current.getNext();
                 }%>
         </table>
+        <footer class="footer">
+            <p>© 2023 Universidad de Costa Rica - Tel. 2511-4000. Aviso Legal. 
+                Última actualización: julio, 2023</p>
+        </footer>
     </body>
 </html>
